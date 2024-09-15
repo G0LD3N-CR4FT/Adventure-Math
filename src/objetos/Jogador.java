@@ -35,6 +35,9 @@ public class Jogador implements Pessoa {
             dano.aumentarAtaque(dano.getAtaque() / contadorRespostas);
             contadorRespostas--;
         }
+        if (tipoClasse == Classes.MATEMATICO && contadorRespostas == 0) {
+            dano.aumentarAtaque(dano.getAtaque() / 0.0000001);
+        }
     }
 
     public Long getVida() {
@@ -43,6 +46,14 @@ public class Jogador implements Pessoa {
 
     public void setVida(Long vida) {
         this.vida = vida;
+    }
+
+    public int onda() {
+        return onda;
+    }
+
+    public void setOnda(int onda) {
+        this.onda = onda;
     }
 
     public void eliminarInimigo() {

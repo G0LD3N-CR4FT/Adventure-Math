@@ -1,5 +1,6 @@
 package src.objetos;
 
-public interface Perguntas {
-    
+public enum Perguntas {
+    Perguntas,
+    Respostas;
 }

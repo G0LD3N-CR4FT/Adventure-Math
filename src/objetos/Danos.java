@@ -15,7 +15,7 @@ public enum Danos {
         return ataque;
     }
 
-    public void aumentarAtaque(int incremento) {
+    public void aumentarAtaque(double incremento) {
         this.ataque += incremento;
     }
 }
