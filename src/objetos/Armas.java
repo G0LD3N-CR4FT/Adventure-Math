@@ -9,7 +9,12 @@ public enum Armas {
 
     private int ataque;
 
-    Armas(int ataque, Pessoa jogador) {
+    public String toString() {
+        return    this.name() +" {" +
+                "Ataque Fisico = " + ataque + "}";
+    }
+
+    Armas(int ataque) {
         this.ataque = ataque;
     }
 

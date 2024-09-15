@@ -2,18 +2,14 @@ package src.objetos;
 
 import src.objetos.interfaces.Pessoa;
 
+import java.util.Random;
+
 public class Jogador implements Pessoa {
 
     private int vida = 20;
     private int danoBasico = 10;
     private Armas armas;
     private Classes tipoClasse;
-
-
-    public Jogador(Classes tipoClasse, Armas armas) {
-        this.tipoClasse = tipoClasse;
-        this.armas = armas;
-    }
 
 
 
@@ -31,14 +27,47 @@ public class Jogador implements Pessoa {
         tipoClasse.aplicarBuff(this);
     }
 
-    public void responderPerguntaCorretamente() {
-        if (tipoClasse == Classes.MATEMATICO && contadorRespostas > 0) {
-            dano.aumentarAtaque(dano.getAtaque() / contadorRespostas);
-            contadorRespostas--;
+
+    // Metodo para mostrar e escolher as classes do jogo
+
+    public void mostrarClasses(){
+
+        Classes[] classes = Classes.values();
+        for (int i = 0; i < classes.length ; i++) {
+            System.out.println(i+1 + " - " + classes[i].toString());
         }
-        if (tipoClasse == Classes.MATEMATICO && contadorRespostas == 0) {
-            dano.aumentarAtaque(dano.getAtaque() / 0.0000001);
+
+        System.out.println("Digite o numero da classe desejada");
+    }
+
+    public void setClasses(int escolha){
+        Classes[] classes = Classes.values();
+        this.tipoClasse = classes[escolha-1];
+        this.vida +=  this.tipoClasse.getBonusVida();
+        this.danoBasico += this.tipoClasse.getBonusDano();
+    }
+
+    // Metodos para mostrar e escolher as armas
+
+    public void mostrarArmas(){
+
+        Armas[] armas = Armas.values();
+        for (int i = 0; i < armas.length ; i++) {
+            System.out.println(i+1 + " - " + armas[i].toString());
         }
+
+        System.out.println("Digite o numero da arma desejada");
+    }
+
+    public void setArmas(int escolha){
+        Armas[] armas = Armas.values();
+        this.armas = armas[escolha-1];
+        this.danoBasico += this.armas.getAtaque();
+    }
+
+
+    public Classes getClasse(){
+        return tipoClasse;
     }
 
     public int getVida() {
@@ -50,24 +79,13 @@ public class Jogador implements Pessoa {
         this.vida = vidaNova;
     }
 
-    public int onda() {
-        return onda;
-    }
-
-    public void setOnda(int onda) {
-        this.onda = onda;
-    }
-
-    public void eliminarInimigo() {
-        if (tipoClasse == Classes.FISICO) {
-            System.out.println("Inimigo espaguetificado!");
-        }
-    }
-
-    public void tornarInvencivel() {
-        if (tipoClasse == Classes.PROGRAMADOR) {
-            // Implementar a lógica para tornar o jogador invencível
-            System.out.println("Jogador é agora invencível!");
-        }
+    @Override
+    public String toString() {
+        return "Jogador {" +
+                "vida=" + vida +
+                ", danoBasico=" + danoBasico +
+                ", armas=" + armas +
+                ", tipoClasse=" + tipoClasse +
+                '}';
     }
 }
