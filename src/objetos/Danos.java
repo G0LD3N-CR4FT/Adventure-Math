@@ -7,7 +7,7 @@ public enum Danos {
 
     private int ataque;
 
-    Danos(int ataque) {
+    Danos (int ataque) {
         this.ataque = ataque;
     }
 

@@ -1,29 +1,33 @@
 package src.objetos;
 
+import src.objetos.interfaces.Pessoa;
+
 public class Jogador implements Pessoa {
-    private Long vida;
-    private Armas tipoArma;
-    private Classes tipoClasse;
+
+    private int vida;
     private Danos dano;
+    private Classes tipoClasse;
     private int onda;
     private int contadorRespostas = 10;
 
-    public Jogador(Long vida, int pontos, Armas tipoArma, Classes tipoClasse, Danos dano, int onda) {
-        this.vida = vida;
-        this.tipoArma = tipoArma;
+    public Jogador(Long vida, int pontos, Classes tipoClasse, Danos dano, int onda) {
+
+
         this.tipoClasse = tipoClasse;
         this.dano = dano;
         this.onda = onda;
     }
 
-    @Override
-    public String getTipoClasse() {
-        return tipoClasse.name();
-    }
+
 
     @Override
     public int getDamage() {
         return dano.getAtaque();
+    }
+
+    @Override
+    public void setDamage(int damage) {
+
     }
 
     public void aplicarBuff() {
@@ -40,12 +44,13 @@ public class Jogador implements Pessoa {
         }
     }
 
-    public Long getVida() {
+    public int getVida() {
         return vida;
     }
 
-    public void setVida(Long vida) {
-        this.vida = vida;
+    @Override
+    public void setVida(int vidaNova) {
+        this.vida = vidaNova;
     }
 
     public int onda() {
