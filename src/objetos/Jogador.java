@@ -4,25 +4,22 @@ import src.objetos.interfaces.Pessoa;
 
 public class Jogador implements Pessoa {
 
-    private int vida;
-    private Danos dano;
+    private int vida = 20;
+    private int danoBasico = 10;
+    private Armas armas;
     private Classes tipoClasse;
-    private int onda;
-    private int contadorRespostas = 10;
-
-    public Jogador(Long vida, int pontos, Classes tipoClasse, Danos dano, int onda) {
 
 
+    public Jogador(Classes tipoClasse, Armas armas) {
         this.tipoClasse = tipoClasse;
-        this.dano = dano;
-        this.onda = onda;
+        this.armas = armas;
     }
 
 
 
     @Override
     public int getDamage() {
-        return dano.getAtaque();
+        return armas.getAtaque();
     }
 
     @Override

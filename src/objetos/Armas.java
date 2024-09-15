@@ -1,13 +1,15 @@
 package src.objetos;
 
-public enum Danos {
+import src.objetos.interfaces.Pessoa;
+
+public enum Armas {
     CalculadoraDoInfinito(10),
     CanhaoCosmico(20),
     DepuradorQuantico(17);
 
     private int ataque;
 
-    Danos (int ataque) {
+    Armas(int ataque, Pessoa jogador) {
         this.ataque = ataque;
     }
 
