@@ -1,5 +1,7 @@
 package src.objetos;
 
+import src.colors.ConsoleColors;
+
 public enum Classes {
     MATEMATICO(5,10){
         @Override
@@ -49,10 +51,10 @@ public enum Classes {
 
     @Override
     public String toString() {
-        return    this.name() +" {" +
-                "bonusVida=" + bonusVida +
-                ", bonusDano=" + bonusDano +
-                "}\n" + this.descricaoBuff() + "\n";
+        return   ConsoleColors.BLACK_BOLD +  this.name() + ConsoleColors.RESET + "\n" +
+                ConsoleColors.GREEN_BOLD + "BONUS DE VIDA: " + bonusVida + ConsoleColors.RESET + "\n" +
+                ConsoleColors.RED_BOLD + "BONUS DE DANO: " + bonusDano + ConsoleColors.RESET + "\n" +
+                "\n";
     }
 
     public abstract void aplicarBuff(Jogador jogador);

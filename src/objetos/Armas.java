@@ -1,17 +1,18 @@
 package src.objetos;
 
+import src.colors.ConsoleColors;
 import src.objetos.interfaces.Pessoa;
 
 public enum Armas {
-    CalculadoraDoInfinito(10),
-    CanhaoCosmico(20),
-    DepuradorQuantico(17);
+    CALCULADORA_DO_INFINITO(10),
+    CANHAO_COSMICO(20),
+    DEPURADOR_QUANTICO(17);
 
     private int ataque;
 
     public String toString() {
-        return    this.name() +" {" +
-                "Ataque Fisico = " + ataque + "}";
+        return    ConsoleColors.CYAN_BOLD + this.name() + ConsoleColors.RESET + "\n" +
+                ConsoleColors.RED_UNDERLINED + "ATAQUE DA ARMA: " + ataque + ConsoleColors.RESET + "\n" + "\n";
     }
 
     Armas(int ataque) {

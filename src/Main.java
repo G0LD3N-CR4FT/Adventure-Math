@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner teclado = new Scanner(System.in);
-        System.out.println("\nBem vindo ao " + ConsoleColors.RED +"Adventure Math"+ ConsoleColors.RESET +", escolha uma classe abaixo \n");
+        System.out.println("\nBem vindo ao " + ConsoleColors.RED_BOLD +"ADVENTURE MATH"+ ConsoleColors.RESET +", escolha uma classe abaixo para começar o jogo \n");
         Jogador jogadores = new Jogador();
 
         // Selecionando a classe do personagem
@@ -28,6 +28,7 @@ public class Main {
         int escolhaArmas = teclado.nextInt();
         jogadores.setArmas(escolhaArmas);
         // Fim de seleção de armas do personagem
+        
 
         System.out.println(jogadores.toString());
     }

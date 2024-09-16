@@ -1,5 +1,6 @@
 package src.objetos;
 
+import src.colors.ConsoleColors;
 import src.objetos.interfaces.Pessoa;
 
 import java.util.Random;
@@ -31,13 +32,11 @@ public class Jogador implements Pessoa {
     // Metodo para mostrar e escolher as classes do jogo
 
     public void mostrarClasses(){
-
+        System.out.println(ConsoleColors.BLUE_BOLD + "---------------DIGITE O NÚMERO DA CLASSE DESEJADA---------------" + ConsoleColors.RESET + "\n");
         Classes[] classes = Classes.values();
         for (int i = 0; i < classes.length ; i++) {
-            System.out.println(i+1 + " - " + classes[i].toString());
+            System.out.println(String.format("%s%d - %s%s", ConsoleColors.BLACK_BOLD, i + 1, ConsoleColors.RESET, classes[i].toString()));
         }
-
-        System.out.println("Digite o numero da classe desejada");
     }
 
     public void setClasses(int escolha){
@@ -50,13 +49,11 @@ public class Jogador implements Pessoa {
     // Metodos para mostrar e escolher as armas
 
     public void mostrarArmas(){
-
+        System.out.println(ConsoleColors.GREEN + "---------------DIGITE O NÚMERO DA ARMA DESEJADA---------------" + ConsoleColors.RESET + "\n");
         Armas[] armas = Armas.values();
         for (int i = 0; i < armas.length ; i++) {
-            System.out.println(i+1 + " - " + armas[i].toString());
+            System.out.println(String.format("%s%d - %s%s", ConsoleColors.CYAN_BOLD, i + 1, ConsoleColors.RESET, armas[i].toString()));
         }
-
-        System.out.println("Digite o numero da arma desejada");
     }
 
     public void setArmas(int escolha){
@@ -81,11 +78,10 @@ public class Jogador implements Pessoa {
 
     @Override
     public String toString() {
-        return "Jogador {" +
-                "vida=" + vida +
-                ", danoBasico=" + danoBasico +
-                ", armas=" + armas +
-                ", tipoClasse=" + tipoClasse +
-                '}';
+        return "\n" + ConsoleColors.ORANGE_BOLD + "-----------------------STATUS DO JOGADOR------------------------" + ConsoleColors.RESET + "\n" + "\n" +
+                ConsoleColors.GREEN_BOLD + "VIDA-------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + vida + ConsoleColors.RESET + "\n" +
+                ConsoleColors.RED_BOLD + "DANO BASE--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET +"\n" +
+                ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas +
+                "CLASSE: " + tipoClasse + "\n";
     }
 }
