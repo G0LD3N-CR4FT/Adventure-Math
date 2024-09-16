@@ -11,6 +11,7 @@ public class Jogador implements Pessoa {
     private int danoBasico = 10;
     private Armas armas;
     private Classes tipoClasse;
+    private int ondas = 1;
 
 
 
@@ -70,6 +71,14 @@ public class Jogador implements Pessoa {
 
     public Classes getClasse(){
         return tipoClasse;
+    }
+
+    public int getOndas(){
+        return ondas;
+    }
+
+    public void setOndas(int ondas){
+        this.ondas = ondas;
     }
 
     public int getVida() {

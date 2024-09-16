@@ -2,6 +2,8 @@ package src.objetos;
 
 import src.objetos.interfaces.Pessoa;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -33,13 +35,21 @@ public class Inimigos implements Pessoa {
 
     public void Perguntar(Jogador p, Scanner entrada) {
         Perguntas[] perguntas = Perguntas.values();
-        // TODO: Realizar forma de liberar perguntas a partir da onda que o Jogador estiver. Podemos Fazer um Stream com filtro para isso.
-        int perguntaAleatoria = new Random().nextInt(perguntas.length);
+        // Selecionando as perguntas por dificuldade
+        List<Perguntas> perguntasDificuldade = Arrays.stream(perguntas)
+                .filter(a -> a.getDificuldade() <= p.getOndas())
+                .toList();
+        // Sorteando uma pergunta da lista
+        int perguntaAleatoriaDificuldade = new Random().nextInt(perguntasDificuldade.size());
 
-        System.out.println(perguntas[perguntaAleatoria].getPergunta());
-        System.out.println(perguntas[perguntaAleatoria].getAlternativa());
+        // int perguntaAleatoria = new Random().nextInt(perguntas.length);
+
+        System.out.println(perguntasDificuldade.get(perguntaAleatoriaDificuldade).getPergunta());
+        System.out.println(perguntasDificuldade.get(perguntaAleatoriaDificuldade).getAlternativa());
         // System.out.println(perguntas[perguntaAleatoria].getResposta());
-        String respostaCorreta = perguntas[perguntaAleatoria].getResposta();
+        // String respostaCorreta = perguntas[perguntaAleatoria].getResposta();
+
+        String respostaCorretaDificuldade = perguntasDificuldade.get(perguntaAleatoriaDificuldade).getResposta();
 
         // Tentando Limpar o Buffer
         entrada.nextLine();  // Descomente se houver um nextInt() ou similar antes dessa função.
@@ -47,7 +57,7 @@ public class Inimigos implements Pessoa {
         System.out.println("\n "+ "Digite sua resposta:");
         String resposta = entrada.nextLine();
 
-        if (resposta.equalsIgnoreCase(respostaCorreta)) {
+        if (resposta.equalsIgnoreCase(respostaCorretaDificuldade)) {
             System.out.println("Acertou");
             System.out.println("Voce carrega seu ataque para acertar seu inimigo com a/o "+ p.getArmas().name() +", tirando "+ p.getDamage() +
                     " de dano ao seu inimigo");
