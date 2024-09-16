@@ -1,6 +1,9 @@
 package src.objetos;
 
+import src.colors.ConsoleColors;
 import src.objetos.interfaces.Pessoa;
+
+import java.util.Random;
 
 public class Jogador implements Pessoa {
 
@@ -8,12 +11,6 @@ public class Jogador implements Pessoa {
     private int danoBasico = 10;
     private Armas armas;
     private Classes tipoClasse;
-
-
-    public Jogador(Classes tipoClasse, Armas armas) {
-        this.tipoClasse = tipoClasse;
-        this.armas = armas;
-    }
 
 
 
@@ -27,18 +24,52 @@ public class Jogador implements Pessoa {
 
     }
 
+
     public void aplicarBuff() {
         tipoClasse.aplicarBuff(this);
     }
 
-    public void responderPerguntaCorretamente() {
-        if (tipoClasse == Classes.MATEMATICO && contadorRespostas > 0) {
-            dano.aumentarAtaque(dano.getAtaque() / contadorRespostas);
-            contadorRespostas--;
+
+    // Metodo para mostrar e escolher as classes do jogo
+
+    public void mostrarClasses(){
+        System.out.println(ConsoleColors.BLUE_BOLD + "---------------DIGITE O NÚMERO DA CLASSE DESEJADA---------------" + ConsoleColors.RESET + "\n");
+        Classes[] classes = Classes.values();
+        for (int i = 0; i < classes.length ; i++) {
+            System.out.println(String.format("%s%d - %s%s", ConsoleColors.BLACK_BOLD, i + 1, ConsoleColors.RESET, classes[i].toString()));
         }
-        if (tipoClasse == Classes.MATEMATICO && contadorRespostas == 0) {
-            dano.aumentarAtaque(dano.getAtaque() / 0.0000001);
+    }
+
+    public void setClasses(int escolha){
+        Classes[] classes = Classes.values();
+        this.tipoClasse = classes[escolha-1];
+        this.vida +=  this.tipoClasse.getBonusVida();
+        this.danoBasico += this.tipoClasse.getBonusDano();
+    }
+
+    // Metodos para mostrar e escolher as armas
+
+    public void mostrarArmas(){
+        System.out.println(ConsoleColors.GREEN + "---------------DIGITE O NÚMERO DA ARMA DESEJADA---------------" + ConsoleColors.RESET + "\n");
+        Armas[] armas = Armas.values();
+        for (int i = 0; i < armas.length ; i++) {
+            System.out.println(String.format("%s%d - %s%s", ConsoleColors.CYAN_BOLD, i + 1, ConsoleColors.RESET, armas[i].toString()));
         }
+    }
+
+    public void setArmas(int escolha){
+        Armas[] armas = Armas.values();
+        this.armas = armas[escolha-1];
+        this.danoBasico += this.armas.getAtaque();
+    }
+
+
+    public Armas getArmas() {
+        return armas;
+    }
+
+    public Classes getClasse(){
+        return tipoClasse;
     }
 
     public int getVida() {
@@ -50,24 +81,12 @@ public class Jogador implements Pessoa {
         this.vida = vidaNova;
     }
 
-    public int onda() {
-        return onda;
-    }
-
-    public void setOnda(int onda) {
-        this.onda = onda;
-    }
-
-    public void eliminarInimigo() {
-        if (tipoClasse == Classes.FISICO) {
-            System.out.println("Inimigo espaguetificado!");
-        }
-    }
-
-    public void tornarInvencivel() {
-        if (tipoClasse == Classes.PROGRAMADOR) {
-            // Implementar a lógica para tornar o jogador invencível
-            System.out.println("Jogador é agora invencível!");
-        }
+    @Override
+    public String toString() {
+        return "\n" + ConsoleColors.ORANGE_BOLD + "-----------------------STATUS DO JOGADOR------------------------" + ConsoleColors.RESET + "\n" + "\n" +
+                ConsoleColors.GREEN_BOLD + "VIDA TOTAL--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + vida + ConsoleColors.RESET + "\n" +
+                ConsoleColors.RED_BOLD + "DANO TOTAL--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET +"\n" +
+                ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas +
+                "CLASSE: " + tipoClasse + "\n";
     }
 }

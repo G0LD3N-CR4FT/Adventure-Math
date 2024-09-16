@@ -1,58 +1,74 @@
-/*package src.objetos;
-
-public enum Classes {
-    MATEMATICO {
-        @Override
-        public void aplicarBuff(Jogador jogador) {
-            System.out.println("To the infinity: A cada pergunta respondida corretamente o dano é aumentado exponencialmente até chegar em infinito");
-            // Possível fórmula this.ataque = ataque + ataque/num--
-            // Num vai começar valendo 10 e vai descrementando
-            // Dessa forma se o ataque for 10 e a pergunta for acertada corretamente ele vai fazer 10 = 10 + 10/10
-            // Ou seja ataque = 11 
-            // Quando o descrementador chegar a 0 o ataque vai berar o infinito se tornando a arma definitiva do matemático
-        }
-    },
-    FISICO {
-        @Override
-        public void aplicarBuff(Jogador jogador) {
-            System.out.println("Even light can't escape: Elimina instântaneamente o inimigo indenpendentemente de qual seja");
-        }
-    },
-    PROGRAMADOR {
-        @Override
-        public void aplicarBuff(Jogador jogador) {
-            System.out.println("Firewall Implacavel: Torna o jogador invencível ");
-        }
-    };
-
-    public abstract void aplicarBuff(Jogador jogador);
-}
-*/
 package src.objetos;
 
+import src.colors.ConsoleColors;
+
 public enum Classes {
-    MATEMATICO {
+    MATEMATICO(5,10){
         @Override
         public void aplicarBuff(Jogador jogador) {
-            jogador.responderPerguntaCorretamente();
-            System.out.println("To the infinity: A cada pergunta respondida corretamente o dano é aumentado exponencialmente até chegar em infinito");
+
+
+        }
+
+        @Override
+        public String descricaoBuff() {
+            return  "To the infinity: A cada pergunta respondida corretamente o dano é aumentado exponencialmente até chegar em infinito";
         }
     },
-    FISICO {
+    FISICO(10, 10){
         @Override
         public void aplicarBuff(Jogador jogador) {
-            jogador.eliminarInimigo();
-            System.out.println("Even light can't escape: Elimina instantaneamente o inimigo independentemente de qual seja");
+
+
+        }
+        @Override
+        public String descricaoBuff(){
+            return "Even light can't escape: Elimina instantaneamente o inimigo independentemente de qual seja";
         }
     },
-    PROGRAMADOR {
+    PROGRAMADOR(0, 5){
         @Override
         public void aplicarBuff(Jogador jogador) {
-            jogador.tornarInvencivel();
-            System.out.println("Firewall Implacável: Torna o jogador invencível ");
+
+
         }
+
+        @Override
+        public String  descricaoBuff() {
+            return "Firewall Implacável: Torna o jogador invencível ";
+        }
+
     };
 
+    private int bonusVida;
+    private int bonusDano;
+
+    Classes(int bonusVida, int bonusDano){
+
+        this.bonusVida = bonusVida;
+        this.bonusDano = bonusDano;
+    }
+
+    @Override
+    public String toString() {
+        return   ConsoleColors.BLACK_BOLD +  this.name() + ConsoleColors.RESET + "\n" +
+                ConsoleColors.GREEN_BOLD + "BONUS DE VIDA: " + bonusVida + ConsoleColors.RESET + "\n" +
+                ConsoleColors.RED_BOLD + "BONUS DE DANO: " + bonusDano + ConsoleColors.RESET + "\n" +
+                "\n";
+    }
+
     public abstract void aplicarBuff(Jogador jogador);
+
+    public abstract String descricaoBuff();
+
+    // Getter para bonusVida
+    public int getBonusVida() {
+        return bonusVida;
+    }
+
+    // Getter para bonusDano
+    public int getBonusDano() {
+        return bonusDano;
+    }
 }
 
