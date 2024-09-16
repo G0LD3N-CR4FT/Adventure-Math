@@ -79,8 +79,8 @@ public class Jogador implements Pessoa {
     @Override
     public String toString() {
         return "\n" + ConsoleColors.ORANGE_BOLD + "-----------------------STATUS DO JOGADOR------------------------" + ConsoleColors.RESET + "\n" + "\n" +
-                ConsoleColors.GREEN_BOLD + "VIDA-------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + vida + ConsoleColors.RESET + "\n" +
-                ConsoleColors.RED_BOLD + "DANO BASE--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET +"\n" +
+                ConsoleColors.GREEN_BOLD + "VIDA TOTAL--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + vida + ConsoleColors.RESET + "\n" +
+                ConsoleColors.RED_BOLD + "DANO TOTAL--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET +"\n" +
                 ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas +
                 "CLASSE: " + tipoClasse + "\n";
     }
