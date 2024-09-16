@@ -24,6 +24,7 @@ public class Jogador implements Pessoa {
 
     }
 
+
     public void aplicarBuff() {
         tipoClasse.aplicarBuff(this);
     }
@@ -62,6 +63,10 @@ public class Jogador implements Pessoa {
         this.danoBasico += this.armas.getAtaque();
     }
 
+
+    public Armas getArmas() {
+        return armas;
+    }
 
     public Classes getClasse(){
         return tipoClasse;
