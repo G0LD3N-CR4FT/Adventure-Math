@@ -166,7 +166,7 @@ public enum Perguntas {
                     "C) 1  \n" +
                     "D) 2  ",
             "A",
-            2),
+            1),
 
     QUESTAO21("Qual o valor de (x) na equação (4x - 5 = 2x + 3)?", 
             "A) 1  \n" +
@@ -174,7 +174,7 @@ public enum Perguntas {
                     "C) 3  \n" +
                     "D) 4  ",
             "D",
-            2);
+            1);
 
 
 
