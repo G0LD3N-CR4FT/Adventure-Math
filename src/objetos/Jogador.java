@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class Jogador implements Pessoa {
 
-    private int vida = 20;
-    private int danoBasico = 10;
+    private int vida = 0;
+    private int danoBasico = 0;
     private Armas armas;
     private Classes tipoClasse;
     private int ondas = 1;
@@ -17,12 +17,12 @@ public class Jogador implements Pessoa {
 
     @Override
     public int getDamage() {
-        return armas.getAtaque();
+        return danoBasico;
     }
 
     @Override
     public void setDamage(int damage) {
-
+        this.danoBasico = damage;
     }
 
 
@@ -90,12 +90,12 @@ public class Jogador implements Pessoa {
         this.vida = vidaNova;
     }
 
-    @Override
-    public String toString() {
-        return "\n" + ConsoleColors.ORANGE_BOLD + "-----------------------STATUS DO JOGADOR------------------------" + ConsoleColors.RESET + "\n" + "\n" +
+    public void status() {
+        System.out.println("\n" + ConsoleColors.ORANGE_BOLD + "-----------------------STATUS DO JOGADOR------------------------" + ConsoleColors.RESET + "\n" + "\n" +
                 ConsoleColors.GREEN_BOLD + "VIDA TOTAL--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + vida + ConsoleColors.RESET + "\n" +
                 ConsoleColors.RED_BOLD + "DANO TOTAL--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET +"\n" +
                 ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas +
-                "CLASSE: " + tipoClasse + "\n";
+                "CLASSE: " + tipoClasse + "\n");
+         ;
     }
 }
