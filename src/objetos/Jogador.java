@@ -4,6 +4,7 @@ import src.colors.ConsoleColors;
 import src.objetos.interfaces.Pessoa;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Jogador implements Pessoa {
 
@@ -41,11 +42,65 @@ public class Jogador implements Pessoa {
         }
     }
 
-    public void setClasses(int escolha){
-        Classes[] classes = Classes.values();
-        this.tipoClasse = classes[escolha-1];
-        this.vida +=  this.tipoClasse.getBonusVida();
-        this.danoBasico += this.tipoClasse.getBonusDano();
+    public boolean setClasses(int escolha){
+        try {
+            Classes[] classes = Classes.values();
+            this.tipoClasse = classes[escolha-1];
+            this.vida +=  this.tipoClasse.getBonusVida();
+            this.danoBasico += this.tipoClasse.getBonusDano();
+            return true;
+        } catch (ArrayIndexOutOfBoundsException error){
+            System.out.println("Essa classe digitada não existe, escolha uma classe valida");
+            return false;
+        }
+    }
+
+    public void escolhaArma(Scanner teclado, Jogador jogador) throws InterruptedException {
+        boolean sucessoArma = false;
+        // Selecionando armas do personagem
+        jogador.mostrarArmas();
+        int escolhaArmas = teclado.nextInt();
+        teclado.nextLine();
+
+        // Realizando a escolha de Classe
+        while(true){
+            sucessoArma  = jogador.setArmas(escolhaArmas);
+            if(sucessoArma){
+                System.out.println("\nA Arma escolhida foi \n"+ jogador.getClasse());
+                System.out.println("Press Enter para continuar -> ");
+                teclado.nextLine();
+                break;
+            } else {
+                Thread.sleep(800);
+                // Selecionando a classe do personagem
+                jogador.mostrarArmas();
+                escolhaArmas = teclado.nextInt();
+                teclado.nextLine(); // Limpando o buffer
+            }
+        }
+    }
+
+    public void escolhaClasse(Scanner teclado, Jogador jogador) throws InterruptedException {
+        boolean sucessoClasse = false;
+        jogador.mostrarClasses();
+        int escolhaClasse = teclado.nextInt();
+        teclado.nextLine();
+        // Realizando a escolha de Classe
+        while(true){
+            sucessoClasse  = jogador.setClasses(escolhaClasse);
+            if(sucessoClasse){
+                System.out.println("\nA classe escolhida foi \n"+ jogador.getClasse());
+                System.out.println("Press Enter para continuar -> ");
+                teclado.nextLine();
+                break;
+            } else {
+                Thread.sleep(800);
+                // Selecionando a classe do personagem
+                jogador.mostrarClasses();
+                escolhaClasse = teclado.nextInt();
+                teclado.nextLine(); // Limpando o buffer
+            }
+        }
     }
 
     // Metodos para mostrar e escolher as armas
@@ -58,10 +113,16 @@ public class Jogador implements Pessoa {
         }
     }
 
-    public void setArmas(int escolha){
-        Armas[] armas = Armas.values();
-        this.armas = armas[escolha-1];
-        this.danoBasico += this.armas.getAtaque();
+    public boolean setArmas(int escolha){
+        try {
+            Armas[] armas = Armas.values();
+            this.armas = armas[escolha - 1];
+            this.danoBasico += this.armas.getAtaque();
+            return true;
+        } catch (ArrayIndexOutOfBoundsException error) {
+            System.out.println("Essa classe digitada não existe, escolha uma classe valida");
+            return false;
+        }
     }
 
 

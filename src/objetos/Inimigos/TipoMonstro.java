@@ -3,8 +3,8 @@ package src.objetos.Inimigos;
 import src.objetos.interfaces.Pessoa;
 
 public enum TipoMonstro implements Pessoa {
-            MOSTRO1("Goblin Matematico",
-                    "         ,      ,\n" +
+            MOSTRO1("Ogro Matematico",
+                    "       ,      ,\n" +
                             "      /(.-\"\"-.)\\\n" +
                             " |\\   \\/      \\/ /|\n" +
                             " | \\ / =.  .= \\ /  |\n" +
@@ -13,9 +13,9 @@ public enum TipoMonstro implements Pessoa {
                             "     /   \\__/     \\\n" +
                             "     \\ \\__/\\__/ /\n" +
                             "   ___\\ \\|--|/ /___\n" +
-                            " /`     \\       /       `\\\n" +
-                            "/        '----'            \\",
-                    "Um Ogro Furioso aproxima de voce, o que voce faz ?",
+                            " /`     \\       /   `\\\n" +
+                            "/        '----'        \\",
+                    "Um Ogro Matematico Furioso aproxima de voce, o que voce faz ?",
                     1 ,20, 80);
 
 

@@ -24,24 +24,20 @@ public class Main {
         System.out.println("Escolha uma classe abaixo para começar o jogo \n");
 
         Jogador jogador = new Jogador();
+        boolean sucessoClasse = false;
 
 
         // Pausa Dramatica
         Thread.sleep(500);
 
         // Selecionando a classe do personagem
-        jogador.mostrarClasses();
-
-        int escolhaClasse = teclado.nextInt();
-        jogador.setClasses(escolhaClasse);
+        jogador.escolhaClasse(teclado,jogador);
         // Fim de seleção de classe do personagem
 
         System.out.println("\n");
-        // Selecionando armas do personagem
-        jogador.mostrarArmas();
 
-        int escolhaArmas = teclado.nextInt();
-        jogador.setArmas(escolhaArmas);
+        // Selecionando armas do personagem
+        jogador.escolhaArma(teclado,jogador);
         // Fim de seleção de armas do personagem
 
 
@@ -56,6 +52,9 @@ public class Main {
 
             // Batalhar contra o Inimigo
             while(monstro.getVida() > 0 && jogador.getVida() > 0){
+                // Foto Monstro
+                // System.out.println("\n" + monstro.getMonstro().getFotoMostro());
+
                 // Menu de Encontro
                 System.out.println("""
 
@@ -72,7 +71,7 @@ public class Main {
                         jogador.status();
                         break;
                     case 3:
-                        System.out.println(monstro.getVida());
+                        monstro.statusMonstro();
                         break;
                     default:
                         System.out.println("Tal acao não é possivel");
@@ -87,6 +86,7 @@ public class Main {
 
             // Verificar se o monstro foi derrotado
             if (monstro.getVida() <= 0) {
+                jogador.setOndas(jogador.getOndas()+1);
                 System.out.println("\n\nVocê derrotou o monstro!, porém voce ainda, não fechou a portal, se prepare eles estão vindo...");
                 Thread.sleep(500);
             }
