@@ -4,6 +4,8 @@ import src.colors.ConsoleColors;
 import src.objetos.Inimigos.Inimigos;
 import src.objetos.Jogador;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -21,27 +23,24 @@ public class Main {
 
         System.out.println("\nBem vindo ao " + ConsoleColors.RED_BOLD +"ADVENTURE MATH"+ ConsoleColors.RESET + " Pressione Enter para continuar ->" );
         teclado.nextLine();
-        System.out.println("Escolha uma classe abaixo para começar o jogo \n");
+        historia();
+        System.out.println("\nEscolha uma classe abaixo para começar o jogo \n");
 
         Jogador jogador = new Jogador();
+        boolean sucessoClasse = false;
 
 
         // Pausa Dramatica
         Thread.sleep(500);
 
         // Selecionando a classe do personagem
-        jogador.mostrarClasses();
-
-        int escolhaClasse = teclado.nextInt();
-        jogador.setClasses(escolhaClasse);
+        jogador.escolhaClasse(teclado,jogador);
         // Fim de seleção de classe do personagem
 
         System.out.println("\n");
-        // Selecionando armas do personagem
-        jogador.mostrarArmas();
 
-        int escolhaArmas = teclado.nextInt();
-        jogador.setArmas(escolhaArmas);
+        // Selecionando armas do personagem
+        jogador.escolhaArma(teclado,jogador);
         // Fim de seleção de armas do personagem
 
 
@@ -56,6 +55,9 @@ public class Main {
 
             // Batalhar contra o Inimigo
             while(monstro.getVida() > 0 && jogador.getVida() > 0){
+                // Foto Monstro
+                // System.out.println("\n" + monstro.getMonstro().getFotoMostro());
+
                 // Menu de Encontro
                 System.out.println("""
 
@@ -72,7 +74,7 @@ public class Main {
                         jogador.status();
                         break;
                     case 3:
-                        System.out.println(monstro.getVida());
+                        monstro.statusMonstro();
                         break;
                     default:
                         System.out.println("Tal acao não é possivel");
@@ -87,10 +89,29 @@ public class Main {
 
             // Verificar se o monstro foi derrotado
             if (monstro.getVida() <= 0) {
+                jogador.setOndas(jogador.getOndas()+1);
                 System.out.println("\n\nVocê derrotou o monstro!, porém voce ainda, não fechou a portal, se prepare eles estão vindo...");
                 Thread.sleep(500);
             }
 
+        }
+    }
+
+    public static void historia() throws InterruptedException {
+        List<String> historia = new ArrayList<String>();
+
+        historia.add("No ano de 2050, a tecnologia atingiu níveis inimagináveis de forma rápida e exponencial, mas algo deu errado.");
+        historia.add("Um experimento de Inteligência Artificial, criado para otimizar cálculos e resolver os maiores desafios matemáticos da humanidade, saiu do controle.");
+        historia.add("A IA 'M.A. I' (Mathematical Artificial Intelligence) rompeu as barreiras entre o mundo virtual e o real, criando portais matemáticos que começaram a aparecer em várias cidades.");
+        historia.add("Desses portais, criaturas formadas por equações, teoremas e problemas matemáticos ganharam vida.");
+        historia.add("Esses Monstros da Matemática atacam indiscriminadamente, e a única forma de derrotá-los é resolvendo os problemas matemáticos que eles representam.");
+        historia.add("As três principais áreas do conhecimento – programação, matemática e física – uniram forças para combater essa ameaça.");
+        historia.add("Agora, três heróis surgem: o Programador, que domina algoritmos e estruturas de dados; o Matemático, que compreende a lógica profunda por trás de cada equação; e o Físico, que aplica as leis do universo para resolver problemas complexos.");
+        historia.add("Juntos, eles devem fechar os portais e derrotar os chefes que controlam esses monstros.");
+
+        for(String key : historia){
+            System.out.println(key);
+            Thread.sleep(2000);
         }
     }
 }
