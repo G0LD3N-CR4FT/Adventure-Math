@@ -111,7 +111,7 @@ public class Main {
 
         for(String key : historia){
             System.out.println(key);
-            Thread.sleep(2000);
+            Thread.sleep(6000);
         }
     }
 }
