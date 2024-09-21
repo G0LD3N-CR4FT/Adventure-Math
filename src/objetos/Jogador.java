@@ -66,7 +66,7 @@ public class Jogador implements Pessoa {
         while(true){
             sucessoArma  = jogador.setArmas(escolhaArmas);
             if(sucessoArma){
-                System.out.println("\nA Arma escolhida foi \n"+ jogador.getClasse());
+                System.out.println("\nA Arma escolhida foi \n"+ jogador.getArmas());
                 System.out.println("Press Enter para continuar -> ");
                 teclado.nextLine();
                 break;
