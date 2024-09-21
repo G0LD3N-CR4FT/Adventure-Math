@@ -50,7 +50,7 @@ public class Main {
             // Escolher Novo Inimigo
             Inimigos monstro = new Inimigos();
             monstro.convocarMonstro(jogador);
-            System.out.println(monstro.getMonstro().getFotoMostro());
+            System.out.println(monstro.getMonstro().getFotoMonstro());
             System.out.println(monstro.getMonstro().getEncontro());
 
             // Batalhar contra o Inimigo
