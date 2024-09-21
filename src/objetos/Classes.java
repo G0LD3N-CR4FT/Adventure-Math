@@ -6,8 +6,18 @@ public enum Classes {
     MATEMATICO(5,10){
         @Override
         public void aplicarBuff(Jogador jogador) {
-
-
+            /* Essa habilidade vai funcionar assim: se a pessoa acertar uma quantidade de questões ela atinge o dano infinito e além disso vai incrementando o dano que ela possui, seguindo tal formula:
+             *
+             * sequenciaderespostascertas = 15 (isso é só um exemplo de 15 questões)
+             * while (sequenciaderespostascertas >= 0){
+             *  ataque = ataque + ataque/sequenciaderespostascertas;
+             *
+             * if (sequenciaderespostascertas = 0){
+             * ataque = ataque/0.00000000001;
+             * }
+             * sequenciaderespostascertas--;
+             * }
+             */
         }
 
         @Override
