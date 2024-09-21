@@ -44,9 +44,9 @@ public class Inimigos {
                 .toList();
 
         int mostroAleatorio = new Random().nextInt(listaTipoMonstroHabilitados.size());
-        this.setMonstro(tipoMonstro[mostroAleatorio]);
-        this.vida = tipoMonstro[mostroAleatorio].getVida();
-        this.dano = tipoMonstro[mostroAleatorio].getDamage();
+        this.setMonstro(listaTipoMonstroHabilitados.get(mostroAleatorio));
+        this.vida = listaTipoMonstroHabilitados.get(mostroAleatorio).getVida();
+        this.dano = listaTipoMonstroHabilitados.get(mostroAleatorio).getDamage();
     }
 
     // Gerando uma pergunta baseado na onda do Jogador
