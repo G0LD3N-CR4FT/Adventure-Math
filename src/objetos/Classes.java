@@ -62,8 +62,8 @@ public enum Classes {
     @Override
     public String toString() {
         return   ConsoleColors.BLACK_BOLD +  this.name() + ConsoleColors.RESET + "\n" +
-                ConsoleColors.GREEN_BOLD + "BONUS DE VIDA: " + bonusVida + ConsoleColors.RESET + "\n" +
-                ConsoleColors.RED_BOLD + "BONUS DE DANO: " + bonusDano + ConsoleColors.RESET + "\n" +
+                ConsoleColors.GREEN_BOLD + "BONUS DE VIDA: " + bonusVida + ConsoleColors.RESET + "💚\n" +
+                ConsoleColors.RED_BOLD + "BONUS DE DANO: " + bonusDano + ConsoleColors.RESET + "🥊\n" +
                 "\n";
     }
 

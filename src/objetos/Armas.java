@@ -5,14 +5,14 @@ import src.objetos.interfaces.Pessoa;
 
 public enum Armas {
     CALCULADORA_DO_INFINITO(10),
-    CANHAO_COSMICO(20),
-    DEPURADOR_QUANTICO(17);
+    CANHAO_COSMICO(15),
+    DEPURADOR_QUANTICO(8);
 
     private int ataque;
 
     public String toString() {
         return    ConsoleColors.CYAN_BOLD + this.name() + ConsoleColors.RESET + "\n" +
-                ConsoleColors.RED_UNDERLINED + "ATAQUE DA ARMA: " + ataque + ConsoleColors.RESET + "\n" + "\n";
+                ConsoleColors.RED_UNDERLINED + "ATAQUE DA ARMA: " + ataque + ConsoleColors.RESET + "💥\n" + "\n";
     }
 
     Armas(int ataque) {
