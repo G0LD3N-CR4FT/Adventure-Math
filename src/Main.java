@@ -46,7 +46,6 @@ public class Main {
 
         // Continuar jogo até a vida do Inimigo Zerar
         while(jogador.getVida() > 0){
-
             // Escolher Novo Inimigo
             Inimigos monstro = new Inimigos();
             monstro.convocarMonstro(jogador);
@@ -91,7 +90,7 @@ public class Main {
                         monstro.statusMonstro();
                         break;
                     default:
-                        System.out.println("Tal acao não é possivel");
+                        System.out.println(ConsoleColors.RED_BOLD +"TAL AÇÃO NÃO É POSSÍVEL"+ ConsoleColors.RESET);
                 }
             }
 
@@ -105,8 +104,8 @@ public class Main {
             if (monstro.getVida() <= 0) {
                 jogador.setOndas(jogador.getOndas()+1);
                 Thread.sleep(2000);
-                System.out.println("\n\nVocê derrotou o monstro!, porém voce ainda, não fechou a portal, se prepare eles estão vindo...");
-                Thread.sleep(2000);
+                System.out.println(ConsoleColors.CYAN_BOLD + "MONSTRO DERROTADO! PORÉM MAIS DELES AINDA ESTÃO A CAMINHO...\n" + ConsoleColors.RESET);
+                Thread.sleep(6000);
             }
 
         }

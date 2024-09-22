@@ -75,7 +75,7 @@ public class Inimigos {
 
             Perguntas Questao = gerarQuestao(jogador);
 
-            System.out.println(Questao.getPergunta());
+            System.out.println("\n" + Questao.getPergunta());
             System.out.println(Questao.getAlternativa());
             // Mostrar a resposta para facilitar
             System.out.println("A Resposta correta é: " + Questao.getResposta());
@@ -85,27 +85,27 @@ public class Inimigos {
             // Tentando Limpar o Buffer
             entrada.nextLine();
 
-            System.out.println("\n"+ "Digite sua resposta:");
+            System.out.println("\n"+ ConsoleColors.YELLOW_BOLD + "DIGITE SUA RESPOSTA:" + ConsoleColors.RESET);
             String resposta = entrada.nextLine();
 
             if (resposta.equalsIgnoreCase(respostaCorretaDificuldade)) {
-                System.out.println("ACERTOU ✅");
-                System.out.println("Voce carrega seu ataque para acertar seu inimigo com a/o "+ jogador.getArmas().name() +", tirando "+ jogador.getDamage() +
-                        " de dano ao seu inimigo");
+                System.out.println(ConsoleColors.GREEN_BOLD +"ACERTOU ✅" + ConsoleColors.RESET + "\n");
+                System.out.println(ConsoleColors.CYAN_BOLD +"VOCÊ ATACA SEU INIMIGO COM A/O "+ jogador.getArmas().name() +", INFRINGINDO "+ jogador.getDamage() +
+                        " DE DANO" + ConsoleColors.RESET);
                 // Removendo Perguntas Repetidas
                 perguntasRestantes.remove(Questao);
                 this.setVida(this.getVida() - jogador.getDamage());
             } else {
-                System.out.println("ERROU ❌\n");
-                System.out.println("O Inimigo se infureceu com sua resposta. Ele te ataca causando "+ this.monstro.getDamage() + " na sua barra de vida" +
-                        "\n Press enter para continuar -->");
+                System.out.println(ConsoleColors.RED_BOLD +"ERROU ❌" + ConsoleColors.RESET + "\n");
+                System.out.println(ConsoleColors.RED_BRIGHT +"O INIMIGO SE ENFURECEU COM SUA RESPOSTA. ELE TE ATACA CAUSANDO "+ this.monstro.getDamage() + " DE DANO NA SUA BARRA DE VIDA" +
+                ConsoleColors.RESET);
                 jogador.setVida(jogador.getVida()-this.monstro.getDamage());
             }
         }
     }
 
     public void statusMonstro() {
-        System.out.println("Nome: " + this.monstro.getNome());
+        System.out.println("\n Nome: " + this.monstro.getNome());
         System.out.println(this.monstro.getFotoMonstro());
         System.out.println("Vida: " + this.getVida() + " | Dano: " + this.getDano());
     

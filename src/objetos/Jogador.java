@@ -171,7 +171,8 @@ public class Jogador implements Pessoa {
 
         bar.append(ConsoleColors.BLACK_BOLD +"] " + ConsoleColors.RESET  + this.getVida() + "/" + vidaMaxima); // Exibindo a vida atual e a máxima
         System.out.println("Barra de Vida: " + bar.toString());
-        System.out.println(ConsoleColors.GREEN_BOLD + "VIDA TOTAL--------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + vida + ConsoleColors.RESET + "💚\n" +
+        System.out.println(ConsoleColors.GREEN_BOLD + "VIDA BASE---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + 100 + ConsoleColors.RESET + "💚\n" +
+                ConsoleColors.DARK_RED + "DANO BASE-----------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + 5 + ConsoleColors.RESET + "🥊\n" +
                 ConsoleColors.RED_BOLD + "DANO TOTAL---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET + "🥊\n" +
                 ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas + "\n" +
                 ConsoleColors.CYAN_BOLD + "CLASSE: " + ConsoleColors.RESET + tipoClasse + "\n");
