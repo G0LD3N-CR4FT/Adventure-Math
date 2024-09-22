@@ -59,11 +59,25 @@ public class Main {
                 // System.out.println("\n" + monstro.getMonstro().getFotoMostro());
 
                 // Menu de Encontro
-                System.out.println("""
+                System.out.println(ConsoleColors.YELLOW_BOLD + """
 
-                        Escolha sua Ação\s
-                        1 - Batalhar, 2 - Status, 3 - Analisar Inimigo""");
+                ESCOLHA SUA AÇÃO \s
 
+                """ + 
+                ConsoleColors.RED_BOLD + "-------------------     " +
+                ConsoleColors.ORANGE_BOLD + "-----------------     " +
+                ConsoleColors.BLUE_BOLD + "---------------------------\n" +
+                ConsoleColors.RED_BOLD + "| 1 - Batalhar ⚔️  |     " +
+                ConsoleColors.ORANGE_BOLD + "| 2 - Status 📊 |     " +
+                ConsoleColors.BLUE_BOLD + "| 3 - Analisar Inimigo 🔍 |\n" +
+                ConsoleColors.RED_BOLD + "-------------------     " +
+                ConsoleColors.ORANGE_BOLD + "-----------------     " +
+                ConsoleColors.BLUE_BOLD + "---------------------------" + 
+                ConsoleColors.RESET);
+
+
+
+                        
                 int acao = teclado.nextInt();
 
                 switch (acao){
@@ -83,15 +97,16 @@ public class Main {
 
             // Verificar se o jogador está vivo
             if (jogador.getVida() <= 0) {
-                System.out.println("Você foi derrotado. Fim de jogo.");
+                System.out.println(ConsoleColors.RED_BOLD +"VOCÊ FOI DERROTADO, FIM DE JOGO"+ ConsoleColors.RESET);
                 break;
             }
 
             // Verificar se o monstro foi derrotado
             if (monstro.getVida() <= 0) {
                 jogador.setOndas(jogador.getOndas()+1);
+                Thread.sleep(2000);
                 System.out.println("\n\nVocê derrotou o monstro!, porém voce ainda, não fechou a portal, se prepare eles estão vindo...");
-                Thread.sleep(500);
+                Thread.sleep(2000);
             }
 
         }
@@ -105,13 +120,13 @@ public class Main {
         historia.add("A IA 'M.A. I' (Mathematical Artificial Intelligence) rompeu as barreiras entre o mundo virtual e o real, criando portais matemáticos que começaram a aparecer em várias cidades.");
         historia.add("Desses portais, criaturas formadas por equações, teoremas e problemas matemáticos ganharam vida.");
         historia.add("Esses Monstros da Matemática atacam indiscriminadamente, e a única forma de derrotá-los é resolvendo os problemas matemáticos que eles representam.");
-        historia.add("As três principais áreas do conhecimento – programação, matemática e física – uniram forças para combater essa ameaça.");
+        historia.add("As três principais áreas do conhecimento: programação, matemática e física uniram forças para combater essa ameaça.");
         historia.add("Agora, três heróis surgem: o Programador, que domina algoritmos e estruturas de dados; o Matemático, que compreende a lógica profunda por trás de cada equação; e o Físico, que aplica as leis do universo para resolver problemas complexos.");
         historia.add("Juntos, eles devem fechar os portais e derrotar os chefes que controlam esses monstros.");
 
         for(String key : historia){
             System.out.println(key);
-            Thread.sleep(6000);
+            Thread.sleep(100);
         }
     }
 }

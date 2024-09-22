@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class Jogador implements Pessoa {
 
-    private int vida = 0;
-    private int danoBasico = 0;
+    private int vida = 100;
+    private int danoBasico = 5;
     private Armas armas;
     private Classes tipoClasse;
     private int ondas = 1;
@@ -66,7 +66,7 @@ public class Jogador implements Pessoa {
         while(true){
             sucessoArma  = jogador.setArmas(escolhaArmas);
             if(sucessoArma){
-                System.out.println("\nA Arma escolhida foi \n"+ jogador.getArmas());
+                System.out.println("\nA ARMA ESCOLHIDA FOI: \n"+ jogador.getArmas());
                 System.out.println("Press Enter para continuar -> ");
                 teclado.nextLine();
                 break;
@@ -89,7 +89,7 @@ public class Jogador implements Pessoa {
         while(true){
             sucessoClasse  = jogador.setClasses(escolhaClasse);
             if(sucessoClasse){
-                System.out.println("\nA classe escolhida foi \n"+ jogador.getClasse());
+                System.out.println("\nA CLASSE ESCOLHIDA FOI: \n"+ jogador.getClasse());
                 System.out.println("Press Enter para continuar -> ");
                 teclado.nextLine();
                 break;
@@ -152,11 +152,30 @@ public class Jogador implements Pessoa {
     }
 
     public void status() {
-        System.out.println("\n" + ConsoleColors.ORANGE_BOLD + "-----------------------STATUS DO JOGADOR------------------------" + ConsoleColors.RESET + "\n" + "\n" +
-                ConsoleColors.GREEN_BOLD + "VIDA TOTAL--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + vida + ConsoleColors.RESET + "\n" +
-                ConsoleColors.RED_BOLD + "DANO TOTAL--------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET +"\n" +
-                ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas +
-                "CLASSE: " + tipoClasse + "\n");
-         ;
+        System.out.println("\n" + ConsoleColors.ORANGE_BOLD + "-----------------------STATUS DO JOGADOR------------------------" + ConsoleColors.RESET + "\n");
+    
+        // Mostrando vida e dano
+        // Criando a barra de vida
+        int barLength = 40; // Comprimento total da barra
+        int vidaMaxima = 100 + tipoClasse.getBonusVida(); // Ajuste aqui para incluir o bônus de vida da classe
+        int filledLength = (int) ((double) this.getVida() / vidaMaxima * barLength); // Cálculo da parte preenchida da barra
+        StringBuilder bar = new StringBuilder(ConsoleColors.BLACK_BOLD +"[" + ConsoleColors.RESET );
+        
+            for (int i = 0; i < barLength; i++) {
+                    if (i < filledLength) {
+                       bar.append(ConsoleColors.GREEN_BOLD +"█"+ ConsoleColors.RESET); // Parte preenchida da barra
+                } else {
+                       bar.append(" "); // Parte vazia da barra
+                }
+            }
+
+        bar.append(ConsoleColors.BLACK_BOLD +"] " + ConsoleColors.RESET  + this.getVida() + "/" + vidaMaxima); // Exibindo a vida atual e a máxima
+        System.out.println("Barra de Vida: " + bar.toString());
+        System.out.println(ConsoleColors.GREEN_BOLD + "VIDA TOTAL--------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + vida + ConsoleColors.RESET + "💚\n" +
+                ConsoleColors.RED_BOLD + "DANO TOTAL---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET + "🥊\n" +
+                ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas + "\n" +
+                ConsoleColors.CYAN_BOLD + "CLASSE: " + ConsoleColors.RESET + tipoClasse + "\n");
     }
+    
+    
 }

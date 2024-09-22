@@ -1,5 +1,6 @@
 package src.objetos.Inimigos;
 
+import src.colors.ConsoleColors;
 import src.objetos.Jogador;
 import src.objetos.Perguntas;
 import src.objetos.interfaces.Pessoa;
@@ -88,23 +89,42 @@ public class Inimigos {
             String resposta = entrada.nextLine();
 
             if (resposta.equalsIgnoreCase(respostaCorretaDificuldade)) {
-                System.out.println("Acertou");
+                System.out.println("ACERTOU ✅");
                 System.out.println("Voce carrega seu ataque para acertar seu inimigo com a/o "+ jogador.getArmas().name() +", tirando "+ jogador.getDamage() +
                         " de dano ao seu inimigo");
                 // Removendo Perguntas Repetidas
                 perguntasRestantes.remove(Questao);
                 this.setVida(this.getVida() - jogador.getDamage());
             } else {
-                System.out.println("Errou\n");
+                System.out.println("ERROU ❌\n");
                 System.out.println("O Inimigo se infureceu com sua resposta. Ele te ataca causando "+ this.monstro.getDamage() + " na sua barra de vida" +
-                        "Press enter para continuar -->");
+                        "\n Press enter para continuar -->");
                 jogador.setVida(jogador.getVida()-this.monstro.getDamage());
             }
         }
     }
 
-    public void statusMonstro(){
-        System.out.println("Vida: " + this.getVida() +" | " + " Dano: " + this.getDano());
+    public void statusMonstro() {
+        System.out.println("Nome: " + this.monstro.getNome());
+        System.out.println(this.monstro.getFotoMonstro());
+        System.out.println("Vida: " + this.getVida() + " | Dano: " + this.getDano());
+    
+        // Criar barra de vida
+        int barLength = 40; // Comprimento total da barra
+        int filledLength = (int) ((double) this.getVida() / this.monstro.getVida() * barLength);
+        StringBuilder bar = new StringBuilder(ConsoleColors.BLACK_BOLD +"["+ ConsoleColors.RESET);
+    
+        for (int i = 0; i < barLength; i++) {
+            if (i < filledLength) {
+                bar.append(ConsoleColors.RED_BOLD +"█"+ ConsoleColors.RESET); // Parte preenchida da barra
+            } else {
+                bar.append(" "); // Parte vazia da barra
+            }
+        }
+    
+        bar.append(ConsoleColors.BLACK_BOLD +"] "+ ConsoleColors.RESET + this.getVida() + "/" + this.monstro.getVida());
+        System.out.println("Barra de Vida: " + bar.toString());
     }
+    
 
 }
