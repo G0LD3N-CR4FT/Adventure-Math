@@ -65,14 +65,21 @@ public class Main {
                 """ + 
                 ConsoleColors.RED_BOLD + "-------------------     " +
                 ConsoleColors.ORANGE_BOLD + "-----------------     " +
-                ConsoleColors.BLUE_BOLD + "---------------------------\n" +
+                ConsoleColors.BLUE_BOLD + "---------------------------     " +
+                ConsoleColors.PURPLE_BOLD + "------------------------------------     " +
+                ConsoleColors.GREEN_BOLD + "----------------------------------\n" +
                 ConsoleColors.RED_BOLD + "| 1 - Batalhar ⚔️  |     " +
                 ConsoleColors.ORANGE_BOLD + "| 2 - Status 📊 |     " +
-                ConsoleColors.BLUE_BOLD + "| 3 - Analisar Inimigo 🔍 |\n" +
+                ConsoleColors.BLUE_BOLD + "| 3 - Analisar Inimigo 🔍 |     " +
+                ConsoleColors.PURPLE_BOLD + "| 4 - Usar Habilidade de Classe 🌀 |     " +
+                ConsoleColors.GREEN_BOLD + "| 5 - Usar Habilidade da Arma 💥 |\n" +
                 ConsoleColors.RED_BOLD + "-------------------     " +
                 ConsoleColors.ORANGE_BOLD + "-----------------     " +
-                ConsoleColors.BLUE_BOLD + "---------------------------" + 
+                ConsoleColors.BLUE_BOLD + "---------------------------     " +
+                ConsoleColors.PURPLE_BOLD + "------------------------------------     " +
+                ConsoleColors.GREEN_BOLD + "----------------------------------" + 
                 ConsoleColors.RESET);
+
 
 
 
