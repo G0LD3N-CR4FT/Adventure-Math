@@ -86,16 +86,20 @@ public class Main {
 
                         
                 int acao = teclado.nextInt();
-
-                switch (acao){
-                    case 1:
+                String tentativa = String.valueOf(acao);
+                switch (tentativa){
+                    case "1":
                         monstro.perguntar(jogador,teclado);
+                        jogador.getClasse().registrarTurno();
                         break;
-                    case 2:
+                    case "2":
                         jogador.status();
                         break;
-                    case 3:
+                    case "3":
                         monstro.statusMonstro();
+                        break;
+                    case "4":
+                        jogador.aplicarBuff(jogador,monstro);
                         break;
                     default:
                         System.out.println(ConsoleColors.RED_BOLD +"TAL AÇÃO NÃO É POSSÍVEL"+ ConsoleColors.RESET);
@@ -135,7 +139,7 @@ public class Main {
                 jogador.setOndas(jogador.getOndas()+1);
                 Thread.sleep(2000);
                 System.out.println(ConsoleColors.CYAN_BOLD + "MONSTRO DERROTADO! PORÉM MAIS DELES AINDA ESTÃO A CAMINHO...\n" + ConsoleColors.RESET);
-                Thread.sleep(6000);
+                Thread.sleep(2000);
             }
 
         }
