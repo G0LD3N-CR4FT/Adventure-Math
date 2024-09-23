@@ -1,9 +1,9 @@
 package src.objetos;
 
 import src.colors.ConsoleColors;
+import src.objetos.Inimigos.Inimigos;
 import src.objetos.interfaces.Pessoa;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class Jogador implements Pessoa {
@@ -27,8 +27,8 @@ public class Jogador implements Pessoa {
     }
 
 
-    public void aplicarBuff() {
-        tipoClasse.aplicarBuff(this);
+    public void aplicarBuff(Jogador jogador, Inimigos monstro) {
+        tipoClasse.aplicarBuff(this, monstro);
     }
 
 
