@@ -6,6 +6,7 @@ import src.objetos.Jogador;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -103,10 +104,32 @@ public class Main {
 
             // Verificar se o jogador está vivo
             if (jogador.getVida() <= 0) {
-                System.out.println(ConsoleColors.RED_BOLD +"VOCÊ FOI DERROTADO, FIM DE JOGO"+ ConsoleColors.RESET);
+                String[] mensagensDeMorte = {
+                "SELANDO DE VEZ A SUA MORTE",
+                "TORNANDO-TE UMA INCÓGNITA NO GRANDE ENIGMA DO UNIVERSO...",
+                "E SEU VALOR FOI REDUZIDO A ZERO ABSOLUTO...",
+                "SEU CÁLCULO FALHOU, E SUA VIDA FOI DIVIDIDA POR ZERO...",
+                "O TEOREMA DA VIDA NÃO CONSEGUIU SER PROVADO...",
+                "SUA VIDA NÃO É COMO A MATEMÁTICA, ELA NÃO PODE SER NEGATIVA",
+                "SEU VALOR AGORA NÃO É MAIS REAL... AGORA, É APENAS IMAGINÁRIO.",
+                "ASSIM A SOMA DE SEUS ERROS RESULTOU NA SUA DERROTA..."
+            };
+
+             // Selecionar uma mensagem aleatória
+            Random random = new Random();
+            String mensagemAleatoria = mensagensDeMorte[random.nextInt(mensagensDeMorte.length)];
+
+            // Exibir a mensagem selecionada
+            System.out.println(ConsoleColors.RED_BRIGHT + mensagemAleatoria + ConsoleColors.RESET);
+            Thread.sleep(3000);
+                System.out.println(ConsoleColors.RED_BOLD +"\n                        ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ \r\n" + //
+                                                            "                       ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗\r\n" + //
+                                                            "                       ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝\r\n" + //
+                                                            "                       ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗\r\n" + //
+                                                            "                       ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║\r\n" + //
+                                                            "                        ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝"+ ConsoleColors.RESET);
                 break;
             }
-
             // Verificar se o monstro foi derrotado
             if (monstro.getVida() <= 0) {
                 jogador.setOndas(jogador.getOndas()+1);
