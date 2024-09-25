@@ -98,9 +98,11 @@ public enum Classes {
         public void registrarTurno() {
             vez = true;
             if (!ativo) {
-                turnosPassados--;
-                String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo" : "";
-                System.out.println(mgs);
+                if(turnosPassados > 0){
+                    turnosPassados--;
+                    String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo" : "";
+                    System.out.println(mgs);
+                }
                 // Se 3 turnos passaram, pode recuperar a habilidade
                 if (turnosPassados == 0) {
                     System.out.println("A habilidade de veneno pode ser reaplicada!");

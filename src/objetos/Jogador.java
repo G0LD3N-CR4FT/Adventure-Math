@@ -120,7 +120,7 @@ public class Jogador implements Pessoa {
             this.danoBasico += this.armas.getAtaque();
             return true;
         } catch (ArrayIndexOutOfBoundsException error) {
-            System.out.println("Essa classe digitada não existe, escolha uma classe valida");
+            System.out.println("Essa Arma digitada não existe, escolha uma Arma valida");
             return false;
         }
     }
