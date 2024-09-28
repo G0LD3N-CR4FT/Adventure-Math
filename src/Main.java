@@ -34,8 +34,6 @@ public class Main {
         System.out.println("\nEscolha uma classe abaixo para começar o jogo \n");
 
         // Todos as Instancias dos objetos
-        // TODO Programing a method for put the menu in a Executor
-
         Jogador jogador = new Jogador();
         Inimigos monstro = new Inimigos();
 
