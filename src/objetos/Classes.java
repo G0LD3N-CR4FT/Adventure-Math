@@ -8,7 +8,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public enum Classes {
-    MATEMATICO(5,10){
+    MATEMATICO(5,10, "SOMA: Desafia-se a responder uma pergunta de dificauldade maiores para aumentar seu dano base em 5"){
 
         public void aplicarBuff(Jogador jogador, Inimigos monstro) {
 
@@ -20,26 +20,15 @@ public enum Classes {
 
         }
     },
-    FISICO(10, 10){
-        @Override
-        public void aplicarBuff(Jogador jogador, Inimigos monstro) {
 
+    FISICO(10, 10, "QUANTUM: Cria uma reacao em cadeia recuperando 10 de vida durante 6 turnos"){
 
-        }
-
-        @Override
-        public void registrarTurno() {
-
-        }
-
-    },
-    PROGRAMADOR(0, 5){
-
-        private int aplicado = 0; // Contador de vezes que o dano foi aplicado
-        private final int limiteAplicado = 6; // Limite de vezes que o dano pode ser aplicado
+        private int aplicado = 0; // Contador de vezes que a vida foi recuperada
+        private final int limiteAplicado = 6; // Limite de vezes que o vida pode ser recuperada
         private boolean ativo = false; // Controle para saber se a habilidade está ativa
         private int turnosPassados = 0; // Contador de turnos passados
         private boolean vez = true;
+        private boolean mgsAplicado = true;
         private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
         @Override
@@ -48,36 +37,39 @@ public enum Classes {
             //
             if (!ativo && turnosPassados == 0 ) {
                 ativo = true;
+                mgsAplicado = false; // A mgs ja foi aplicada, então pode aplicar depois
                 aplicado = 0; // Reseta o contador de aplicações
 
-                System.out.println("Buff ativado! Causando dano ao inimigo a cada turno.");
+                System.out.println("Buff QUANTUM ativado! A cada turno vai restaurar 10 de vida .");
 
 
 
                 // Agendar a tarefa de causar dano
                 Runnable tarefa = () -> {
-                    if (monstro.getVida() <= 0){
-                        ativo = true;
-                        cancelarBuff();
-                        System.out.println("O inimigo foi derrotado pelo BUG! O BUG foi Desfeito");
-                    }
                     if (vez) {
                         vez = false;
-                        if (aplicado <= limiteAplicado && monstro.getVida() > 0) {
+                        if (aplicado <= limiteAplicado && jogador.getVida() > 0) {
                             aplicado++; // Incrementa o contador de execuções
-                            int danoPorTurno = 6; // Dano a ser causado
+                            int vidaPorTurno = 10; // Dano a ser causado
                             // System.out.println("Causando " + danoPorTurno + " de dano no Inimigo.");
-                            monstro.setVida(monstro.getVida() - danoPorTurno);
-                            System.out.println("o inimigo tomou 6 de dano, agora ele esta com : " + monstro.getVida());
-
+                            int vidatotal = jogador.getClasse().getBonusVida() +100;
+                            int vidaResto = jogador.getVida();
+                            boolean vidaCheia = jogador.getClasse().getBonusVida() + 100 >= jogador.getVida();
+                            if(!vidaCheia){
+                                jogador.setVida(jogador.getVida() + vidaPorTurno);
+                                System.out.println("Voce recuperou 10 de vida");
+                            } else {
+                                System.out.println("A vida ja esta cheia");
+                            }
                         } else if (aplicado >= limiteAplicado){
-                            System.out.println("Buff finalizado execuções, espera " + (3 - turnosPassados) + " turno para usar de novo");
-                            System.out.println("Buff finalizado. Aguardando " + (limiteAplicado - turnosPassados) + " turnos para usar de novo.");
+                            System.out.println("Buff QUANTUM foi finalizado execuções, espera " + (5 - turnosPassados) + " turno para usar de novo");
+                            System.out.println("Buff QUANTUM finalizado apos ser executado  " + (limiteAplicado ) );
                             cancelarBuff(); // Reseta o estado do buff
                         }
                     }
                 };
 
+                // Talvez diminuir a tempo para não atrapalhar o fluxo do jogo
                 executor.scheduleAtFixedRate(tarefa, 0, 1, TimeUnit.SECONDS);
                 // Finalizando Thread
                 if(jogador.getVida() <= 0) {
@@ -98,12 +90,15 @@ public enum Classes {
         public void registrarTurno() {
             vez = true;
             if (!ativo) {
-                turnosPassados--;
-                String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo" : "";
-                System.out.println(mgs);
+                if(turnosPassados > 0){
+                    turnosPassados--;
+                    String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo" : "";
+                    System.out.println(mgs);
+                }
                 // Se 3 turnos passaram, pode recuperar a habilidade
-                if (turnosPassados == 0) {
-                    System.out.println("A habilidade de veneno pode ser reaplicada!");
+                if (turnosPassados == 0 && !ativo && !mgsAplicado) {
+                    mgsAplicado = true;
+                    System.out.println("A habilidade QUANTUM pode ser reaplicada!");
                 }
             }
         }
@@ -111,7 +106,105 @@ public enum Classes {
 
         private void cancelarBuff() {
             try {
-                Thread.sleep(500); // Esperar as variaveis atualizar
+                ativo = false; // Desativa o buff
+                aplicado = 0; // Reseta o contador de execuções
+                turnosPassados = 5;
+                vez = true; // Permite a execução no próximo turno
+                executor.shutdown(); // Finaliza o executor para liberar recursos
+
+                // Reinicializa o executor para o próximo uso
+                executor = Executors.newScheduledThreadPool(1);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    },
+
+    PROGRAMADOR(1000, 5, "BUG: Infecta os Inimigos com um Bug para tirar 6 de vida durante 6 turnos"){
+
+        private int aplicado = 0; // Contador de vezes que o dano foi aplicado
+        private final int limiteAplicado = 6; // Limite de vezes que o dano pode ser aplicado
+        private boolean ativo = false; // Controle para saber se a habilidade está ativa
+        private int turnosPassados = 0; // Contador de turnos passados
+        private boolean vez = true;
+        private boolean mgsAplicado = true;
+        private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
+        @Override
+        public void aplicarBuff(Jogador jogador, Inimigos monstro) {
+
+            //
+            if (!ativo && turnosPassados == 0 ) {
+                ativo = true;
+                mgsAplicado = false; // A mgs ja foi aplicada, então pode aplicar depois
+                aplicado = 0; // Reseta o contador de aplicações
+
+                System.out.println("Buff BUG ativado! Causando dano ao inimigo a cada turno.");
+
+
+
+                // Agendar a tarefa de causar dano
+                Runnable tarefa = () -> {
+                    if (monstro.getVida() <= 0 && jogador.getVida() > 0){
+                        ativo = true;
+                        cancelarBuff();
+                        System.out.println("O inimigo foi derrotado! O BUG foi Desfeito");
+                    }
+                    if (vez) {
+                        vez = false;
+                        if (aplicado <= limiteAplicado && monstro.getVida() > 0) {
+                            aplicado++; // Incrementa o contador de execuções
+                            int danoPorTurno = 6; // Dano a ser causado
+                            // System.out.println("Causando " + danoPorTurno + " de dano no Inimigo.");
+                            monstro.danoTomado(danoPorTurno);
+                            System.out.println("o inimigo tomou 6 de dano, agora ele esta com : " + monstro.getVida());
+
+                        } else if (aplicado >= limiteAplicado){
+                            System.out.println("Buff BUG finalizado execuções, espera " + (3 - turnosPassados) + " turno para usar de novo");
+                            System.out.println("Buff BUG finalizado apos ser executado  " + (limiteAplicado ) );
+                            cancelarBuff(); // Reseta o estado do buff
+                        }
+                    }
+                };
+
+                // Talvez diminuir a tempo para não atrapalhar o fluxo do jogo
+                executor.scheduleAtFixedRate(tarefa, 0, 1, TimeUnit.SECONDS);
+                // Finalizando Thread
+                if(jogador.getVida() <= 0) {
+                    executor.shutdown();
+                }
+            } else {
+                if (ativo){
+                    System.out.println("Buff já está ativo!");
+                }
+                if (turnosPassados != 0){
+                    System.out.println("Ainda não é possivel ativar o Buff BUG, faltam " + turnosPassados + " turnos.");
+                }
+
+            }
+        }
+
+        @Override
+        public void registrarTurno() {
+            vez = true;
+            if (!ativo) {
+                if(turnosPassados > 0){
+                    turnosPassados--;
+                    String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo" : "";
+                    System.out.println(mgs);
+                }
+                // Se 3 turnos passaram, pode recuperar a habilidade
+                if (turnosPassados == 0 && !ativo && !mgsAplicado) {
+                    mgsAplicado = true;
+                    System.out.println("A habilidade BUG pode ser reaplicada!");
+                }
+            }
+        }
+
+
+        private void cancelarBuff() {
+            try {
                 ativo = false; // Desativa o buff
                 aplicado = 0; // Reseta o contador de execuções
                 turnosPassados = 3;
@@ -120,23 +213,23 @@ public enum Classes {
 
                 // Reinicializa o executor para o próximo uso
                 executor = Executors.newScheduledThreadPool(1);
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
-
-        // Método para registrar turnos e verificar a recuperação do buff
 
 
     };
 
     private int bonusVida;
     private int bonusDano;
+    private String descricaoHabilidade;
 
-    Classes(int bonusVida, int bonusDano){
+    Classes(int bonusVida, int bonusDano, String descricaoHabilidade){
 
         this.bonusVida = bonusVida;
         this.bonusDano = bonusDano;
+        this.descricaoHabilidade = descricaoHabilidade;
     }
 
     @Override
@@ -144,6 +237,7 @@ public enum Classes {
         return   ConsoleColors.BLACK_BOLD +  this.name() + ConsoleColors.RESET + "\n" +
                 ConsoleColors.GREEN_BOLD + "BONUS DE VIDA: " + bonusVida + ConsoleColors.RESET + "💚\n" +
                 ConsoleColors.RED_BOLD + "BONUS DE DANO: " + bonusDano + ConsoleColors.RESET + "🥊\n" +
+                ConsoleColors.CYAN_BOLD + "HABILIDADE: " + descricaoHabilidade + ConsoleColors.RESET + "🧙\n" +
                 "\n";
     }
 

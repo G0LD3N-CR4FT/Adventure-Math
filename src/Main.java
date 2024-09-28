@@ -8,11 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
+    private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
     public static void main(String[] args) throws InterruptedException {
 
+        // TODO Create a function for presentation of the game, is much confusing all this here
         System.out.println("\n" + ConsoleColors.CYAN_BOLD +
                 "███╗   ███╗ █████╗ ████████╗██╗  ██╗     █████╗ ██████╗ ██╗   ██╗███████╗███╗   ██╗████████╗██╗   ██╗██████╗ ███████╗\r\n" + //
                 "████╗ ████║██╔══██╗╚══██╔══╝██║  ██║    ██╔══██╗██╔══██╗██║   ██║██╔════╝████╗  ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝\r\n" + //
@@ -27,9 +33,82 @@ public class Main {
         historia();
         System.out.println("\nEscolha uma classe abaixo para começar o jogo \n");
 
+        // Todos as Instancias dos objetos
         Jogador jogador = new Jogador();
-        boolean sucessoClasse = false;
+        Inimigos monstro = new Inimigos();
 
+// Verificação se o executor está rodando
+        boolean[] isRunning = {true};
+
+        // Thread do menu
+        Runnable menuRunnable = () -> {
+            while (monstro.getVida() > 0 && jogador.getVida() > 0 && isRunning[0]) {
+                // Exibir o menu de ação
+
+                // Menu de Encontro
+                System.out.println(ConsoleColors.YELLOW_BOLD + """
+
+                ESCOLHA SUA AÇÃO \s
+
+                """ +
+                        ConsoleColors.RED_BOLD + "-------------------     " +
+                        ConsoleColors.ORANGE_BOLD + "-----------------     " +
+                        ConsoleColors.BLUE_BOLD + "---------------------------     " +
+                        ConsoleColors.PURPLE_BOLD + "------------------------------------     " +
+                        ConsoleColors.GREEN_BOLD + "----------------------------------\n" +
+                        ConsoleColors.RED_BOLD + "| 1 - Batalhar ⚔️  |     " +
+                        ConsoleColors.ORANGE_BOLD + "| 2 - Status 📊 |     " +
+                        ConsoleColors.BLUE_BOLD + "| 3 - Analisar Inimigo 🔍 |     " +
+                        ConsoleColors.PURPLE_BOLD + "| 4 - Usar Habilidade de Classe 🌀 |     " +
+                        ConsoleColors.GREEN_BOLD + "| 5 - Usar Habilidade da Arma 💥 |\n" +
+                        ConsoleColors.RED_BOLD + "-------------------     " +
+                        ConsoleColors.ORANGE_BOLD + "-----------------     " +
+                        ConsoleColors.BLUE_BOLD + "---------------------------     " +
+                        ConsoleColors.PURPLE_BOLD + "------------------------------------     " +
+                        ConsoleColors.GREEN_BOLD + "----------------------------------" +
+                        ConsoleColors.RESET);
+
+                // Esperar ação do jogador
+                if (teclado.hasNextLine()) {
+                    String acao = teclado.nextLine();
+                    switch (acao) {
+                        case "1":
+                            // Lógica de batalha
+                            monstro.perguntar(jogador,teclado);
+                            jogador.getClasse().registrarTurno();
+                            break;
+                        case "2":
+                            // Exibir status
+                            jogador.status();
+                            break;
+                        case "3":
+                            // Analisar o inimigo
+                            monstro.statusMonstro();
+                            break;
+                        case "4":
+                            // Usar habilidade de classe
+                            jogador.aplicarBuff(jogador, monstro);
+                            break;
+                        case "5":
+                            // Usar habilidade da arma
+
+                            break;
+                        default:
+                            System.out.println(ConsoleColors.RED_BOLD +"TAL AÇÃO NÃO É POSSÍVEL"+ ConsoleColors.RESET);
+                    }
+
+                    // Verificação se o monstro morreu
+                    if (monstro.getVida() <= 0) {
+                        // Finalizando a aparição do Menu
+                        isRunning[0] = false;
+                        break;
+                    }
+                }
+
+                // Yield para dar vez a outras threads
+                Thread.yield();
+            }
+        };
 
         // Pausa Dramatica
         Thread.sleep(500);
@@ -48,63 +127,43 @@ public class Main {
         // Continuar jogo até a vida do Inimigo Zerar
         while(jogador.getVida() > 0){
             // Escolher Novo Inimigo
-            Inimigos monstro = new Inimigos();
             monstro.convocarMonstro(jogador);
             System.out.println(monstro.getMonstro().getFotoMonstro());
             System.out.println(monstro.getMonstro().getEncontro());
 
-            // Batalhar contra o Inimigo
-            while(monstro.getVida() > 0 && jogador.getVida() > 0){
-                // Foto Monstro
-                // System.out.println("\n" + monstro.getMonstro().getFotoMostro());
+            executor.scheduleAtFixedRate(menuRunnable, 0, 500, TimeUnit.MILLISECONDS);
 
-                // Menu de Encontro
-                System.out.println(ConsoleColors.YELLOW_BOLD + """
-
-                ESCOLHA SUA AÇÃO \s
-
-                """ + 
-                ConsoleColors.RED_BOLD + "-------------------     " +
-                ConsoleColors.ORANGE_BOLD + "-----------------     " +
-                ConsoleColors.BLUE_BOLD + "---------------------------     " +
-                ConsoleColors.PURPLE_BOLD + "------------------------------------     " +
-                ConsoleColors.GREEN_BOLD + "----------------------------------\n" +
-                ConsoleColors.RED_BOLD + "| 1 - Batalhar ⚔️  |     " +
-                ConsoleColors.ORANGE_BOLD + "| 2 - Status 📊 |     " +
-                ConsoleColors.BLUE_BOLD + "| 3 - Analisar Inimigo 🔍 |     " +
-                ConsoleColors.PURPLE_BOLD + "| 4 - Usar Habilidade de Classe 🌀 |     " +
-                ConsoleColors.GREEN_BOLD + "| 5 - Usar Habilidade da Arma 💥 |\n" +
-                ConsoleColors.RED_BOLD + "-------------------     " +
-                ConsoleColors.ORANGE_BOLD + "-----------------     " +
-                ConsoleColors.BLUE_BOLD + "---------------------------     " +
-                ConsoleColors.PURPLE_BOLD + "------------------------------------     " +
-                ConsoleColors.GREEN_BOLD + "----------------------------------" + 
-                ConsoleColors.RESET);
+            // Verificação contínua da vida do monstro (main thread)
+            while (jogador.getVida() > 0) {
 
 
-
-
-                        
-                int acao = teclado.nextInt();
-                String tentativa = String.valueOf(acao);
-                switch (tentativa){
-                    case "1":
-                        monstro.perguntar(jogador,teclado);
-                        jogador.getClasse().registrarTurno();
-                        break;
-                    case "2":
-                        jogador.status();
-                        break;
-                    case "3":
-                        monstro.statusMonstro();
-                        break;
-                    case "4":
-                        jogador.aplicarBuff(jogador,monstro);
-                        break;
-                    default:
-                        System.out.println(ConsoleColors.RED_BOLD +"TAL AÇÃO NÃO É POSSÍVEL"+ ConsoleColors.RESET);
+                // Finalizando a espera da Thread Main
+                if (monstro.getVida() <= 0) {
+                    isRunning[0] = false;  // Sinalizar que o menu deve parar
+                    break;
                 }
+
+                // Yield para permitir que outras threads executem
+                Thread.yield();
+
+                // Simulação de espera para o próximo turno (para não sobrecarregar a CPU)
+                Thread.sleep(500);
             }
+
+            // Encerrar o executor após a batalha
+            executor.shutdown();
+            try {
+                if (!executor.awaitTermination(1, TimeUnit.SECONDS)) {
+                    executor.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                executor.shutdownNow();
+            } finally {
+                // Reinicializa o executor para o próximo uso
+                executor = Executors.newScheduledThreadPool(1);
+                isRunning[0] = true;
+            }
+
 
             // Verificar se o jogador está vivo
             if (jogador.getVida() <= 0) {
@@ -143,6 +202,7 @@ public class Main {
             }
 
         }
+        teclado.close();
     }
 
     public static void historia() throws InterruptedException {
