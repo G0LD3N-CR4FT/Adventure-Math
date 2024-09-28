@@ -69,6 +69,16 @@ public class Inimigos {
         return perguntasRestantes.get(perguntaAleatoriaDificuldade);
     }
 
+    // Evitar o inimigo ficar com vida negativa
+    public void danoTomado(int dano){
+        int vidaRestante = this.getVida();
+            if(dano > vidaRestante){
+                vidaRestante = 0;
+            } else {
+                vidaRestante -= dano;
+            }
+        setVida(vidaRestante);
+    }
     // Função de batalha do jogo
     public void perguntar(Jogador jogador, Scanner entrada) {
         if(this.monstro.getVida() > 0){
@@ -82,8 +92,8 @@ public class Inimigos {
 
             String respostaCorretaDificuldade = Questao.getResposta();
 
-            // Tentando Limpar o Buffer
-            entrada.nextLine();
+            // Tentando Limpar o Buffer (Devido ao NextInt, porém foi removido provisoriamente)
+            // entrada.nextLine();
 
             System.out.println("\n"+ ConsoleColors.YELLOW_BOLD + "DIGITE SUA RESPOSTA:" + ConsoleColors.RESET);
             String resposta = entrada.nextLine();
@@ -94,7 +104,7 @@ public class Inimigos {
                         " DE DANO" + ConsoleColors.RESET);
                 // Removendo Perguntas Repetidas
                 perguntasRestantes.remove(Questao);
-                this.setVida(this.getVida() - jogador.getDamage());
+                this.danoTomado(jogador.getDamage());
             } else {
                 System.out.println(ConsoleColors.RED_BOLD +"ERROU ❌" + ConsoleColors.RESET + "\n");
                 System.out.println(ConsoleColors.RED_BRIGHT +"O INIMIGO SE ENFURECEU COM SUA RESPOSTA. ELE TE ATACA CAUSANDO "+ this.monstro.getDamage() + " DE DANO NA SUA BARRA DE VIDA" +

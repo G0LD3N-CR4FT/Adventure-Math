@@ -33,13 +33,14 @@ public enum Classes {
         }
 
     },
-    PROGRAMADOR(0, 5){
+    PROGRAMADOR(1000, 5){
 
         private int aplicado = 0; // Contador de vezes que o dano foi aplicado
         private final int limiteAplicado = 6; // Limite de vezes que o dano pode ser aplicado
         private boolean ativo = false; // Controle para saber se a habilidade está ativa
         private int turnosPassados = 0; // Contador de turnos passados
         private boolean vez = true;
+        private boolean mgsAplicado = true;
         private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
         @Override
@@ -48,18 +49,19 @@ public enum Classes {
             //
             if (!ativo && turnosPassados == 0 ) {
                 ativo = true;
+                mgsAplicado = false; // A mgs ja foi aplicada, então pode aplicar depois
                 aplicado = 0; // Reseta o contador de aplicações
 
-                System.out.println("Buff ativado! Causando dano ao inimigo a cada turno.");
+                System.out.println("Buff BUG ativado! Causando dano ao inimigo a cada turno.");
 
 
 
                 // Agendar a tarefa de causar dano
                 Runnable tarefa = () -> {
-                    if (monstro.getVida() <= 0){
+                    if (monstro.getVida() <= 0 && jogador.getVida() > 0){
                         ativo = true;
                         cancelarBuff();
-                        System.out.println("O inimigo foi derrotado pelo BUG! O BUG foi Desfeito");
+                        System.out.println("O inimigo foi derrotado! O BUG foi Desfeito");
                     }
                     if (vez) {
                         vez = false;
@@ -67,17 +69,18 @@ public enum Classes {
                             aplicado++; // Incrementa o contador de execuções
                             int danoPorTurno = 6; // Dano a ser causado
                             // System.out.println("Causando " + danoPorTurno + " de dano no Inimigo.");
-                            monstro.setVida(monstro.getVida() - danoPorTurno);
+                            monstro.danoTomado(danoPorTurno);
                             System.out.println("o inimigo tomou 6 de dano, agora ele esta com : " + monstro.getVida());
 
                         } else if (aplicado >= limiteAplicado){
-                            System.out.println("Buff finalizado execuções, espera " + (3 - turnosPassados) + " turno para usar de novo");
-                            System.out.println("Buff finalizado. Aguardando " + (limiteAplicado - turnosPassados) + " turnos para usar de novo.");
+                            System.out.println("Buff BUG finalizado execuções, espera " + (3 - turnosPassados) + " turno para usar de novo");
+                            System.out.println("Buff BUG finalizado apos ser executado  " + (limiteAplicado ) );
                             cancelarBuff(); // Reseta o estado do buff
                         }
                     }
                 };
 
+                // Talvez diminuir a tempo para não atrapalhar o fluxo do jogo
                 executor.scheduleAtFixedRate(tarefa, 0, 1, TimeUnit.SECONDS);
                 // Finalizando Thread
                 if(jogador.getVida() <= 0) {
@@ -104,7 +107,8 @@ public enum Classes {
                     System.out.println(mgs);
                 }
                 // Se 3 turnos passaram, pode recuperar a habilidade
-                if (turnosPassados == 0) {
+                if (turnosPassados == 0 && !ativo && !mgsAplicado) {
+                    mgsAplicado = true;
                     System.out.println("A habilidade de veneno pode ser reaplicada!");
                 }
             }
@@ -113,7 +117,6 @@ public enum Classes {
 
         private void cancelarBuff() {
             try {
-                Thread.sleep(500); // Esperar as variaveis atualizar
                 ativo = false; // Desativa o buff
                 aplicado = 0; // Reseta o contador de execuções
                 turnosPassados = 3;
@@ -122,7 +125,7 @@ public enum Classes {
 
                 // Reinicializa o executor para o próximo uso
                 executor = Executors.newScheduledThreadPool(1);
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
