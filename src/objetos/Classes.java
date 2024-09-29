@@ -8,7 +8,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public enum Classes {
-    MATEMATICO(5,10, "SOMA: Desafia-se a responder uma pergunta de dificauldade maiores para aumentar seu dano base em 5"){
+    MATEMATICO(5,10, ConsoleColors.GREEN_BRIGHT + "SOMA➤ " +
+                                                         ConsoleColors.GREEN + "Ao acertar uma pergunta de maior dificuldade, você aumenta seu dano base em 5." +
+                                                         ConsoleColors.RESET
+){
 
         public void aplicarBuff(Jogador jogador, Inimigos monstro) {
 
@@ -21,7 +24,10 @@ public enum Classes {
         }
     },
 
-    FISICO(10, 10, "QUANTUM: Cria uma reacao em cadeia recuperando 10 de vida durante 6 turnos"){
+    FISICO(10, 10, ConsoleColors.PURPLE_BRIGHT + "QUANTUM➤ " +
+                                                       ConsoleColors.PURPLE + "Inicia uma reação em cadeia, restaurando 10 pontos de vida a cada turno, durante 6 turnos consecutivos" +
+                                                       ConsoleColors.RESET
+){
 
         private int aplicado = 0; // Contador de vezes que a vida foi recuperada
         private final int limiteAplicado = 6; // Limite de vezes que o vida pode ser recuperada
@@ -121,7 +127,16 @@ public enum Classes {
 
     },
 
-    PROGRAMADOR(1000, 5, "BUG: Infecta os Inimigos com um Bug para tirar 6 de vida durante 6 turnos"){
+    PROGRAMADOR(1000, 5,
+            ConsoleColors.RED_BRIGHT     + "G" +
+                             ConsoleColors.YELLOW_BRIGHT + "L" +
+                             ConsoleColors.GREEN_BRIGHT  + "I" +
+                             ConsoleColors.CYAN_BRIGHT   + "T" +
+                             ConsoleColors.BLUE_BRIGHT   + "C" +
+                             ConsoleColors.PURPLE_BRIGHT + "H" +
+                             ConsoleColors.RED_BRIGHT    + "E" +
+                             ConsoleColors.YELLOW_BRIGHT + "D" +
+                             ConsoleColors.CYAN + "➤  Lança um bug que infecta os inimigos, causando 6 de dano por turno durante 6 turnos" + ConsoleColors.RESET){
 
         private int aplicado = 0; // Contador de vezes que o dano foi aplicado
         private final int limiteAplicado = 6; // Limite de vezes que o dano pode ser aplicado
@@ -234,7 +249,7 @@ public enum Classes {
 
     @Override
     public String toString() {
-        return   ConsoleColors.BLACK_BOLD +  this.name() + ConsoleColors.RESET + "\n" +
+        return   ConsoleColors.WHITE_BRIGHT +  this.name() + ConsoleColors.RESET + "\n" +
                 ConsoleColors.GREEN_BOLD + "BONUS DE VIDA: " + bonusVida + ConsoleColors.RESET + "💚\n" +
                 ConsoleColors.RED_BOLD + "BONUS DE DANO: " + bonusDano + ConsoleColors.RESET + "🥊\n" +
                 ConsoleColors.CYAN_BOLD + "HABILIDADE: " + descricaoHabilidade + ConsoleColors.RESET + "🧙\n" +

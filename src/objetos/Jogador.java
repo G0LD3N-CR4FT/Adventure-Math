@@ -38,7 +38,7 @@ public class Jogador implements Pessoa {
         System.out.println(ConsoleColors.BLUE_BOLD + "---------------DIGITE O NÚMERO DA CLASSE DESEJADA---------------" + ConsoleColors.RESET + "\n");
         Classes[] classes = Classes.values();
         for (int i = 0; i < classes.length ; i++) {
-            System.out.println(String.format("%s%d - %s%s", ConsoleColors.BLACK_BOLD, i + 1, ConsoleColors.RESET, classes[i].toString()));
+            System.out.println(String.format("%s%d - %s%s", ConsoleColors.WHITE_BOLD_BRIGHT, i + 1, ConsoleColors.RESET, classes[i].toString()));
         }
     }
 
