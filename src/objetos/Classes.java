@@ -3,21 +3,112 @@ package src.objetos;
 import src.colors.ConsoleColors;
 import src.objetos.Inimigos.Inimigos;
 
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public enum Classes {
-    MATEMATICO(5,10, "SOMA: Desafia-se a responder uma pergunta de dificauldade maiores para aumentar seu dano base em 5"){
+    MATEMATICO(5,10, ConsoleColors.GREEN_BRIGHT + "SOMA➤ " +
+                                                         ConsoleColors.GREEN + "Ao acertar uma pergunta de maior dificuldade, você aumenta seu dano base em 5." +
+                                                         ConsoleColors.RESET
+){
 
+        private static List<Perguntas> perguntasRestantes = new ArrayList<Perguntas>();
+        private int turnosPassados = 0; // Contador de turnos passados
+        private boolean vez = true;
+        // Vai pegar uma pergunta de 2 Ondas acima para responder
+        // TODO  VOU TER QUE REVISAR, ESTA DANDO LOOP INFINITO NA PARTE DO MENU.
         public void aplicarBuff(Jogador jogador, Inimigos monstro) {
+            if (turnosPassados == 0 ) {
+                if(vez) {
+                    Scanner entrada = new Scanner(System.in);
 
+                    // Importar o metodo statico não vai adiantar, pois vamos pegar dificuldades maiores
+                    Perguntas Questao = gerarPeruntaMatematico(jogador, monstro);
+                    pausaTexto();
+                    System.out.println("\n" + Questao.getPergunta());
+                    System.out.println(Questao.getAlternativa());
+                    // Mostrar a resposta para facilitar
+                    System.out.println("A Resposta correta é: " + Questao.getResposta());
 
+                    String respostaCorretaDificuldade = Questao.getResposta();
+
+                    System.out.println("\n" + ConsoleColors.YELLOW_BOLD + "DIGITE SUA RESPOSTA:" + ConsoleColors.RESET);
+                    String resposta = entrada.nextLine();
+
+                    if (resposta.equalsIgnoreCase(respostaCorretaDificuldade)) {
+                        System.out.println(ConsoleColors.GREEN_BOLD + "ACERTOU ✅" + ConsoleColors.RESET + "\n");
+                        System.out.println(ConsoleColors.CYAN_BOLD + "VOCE ACERTOU O CALCULO, GANHANDO 5 DE DANO" + ConsoleColors.RESET);
+                        // Removendo Perguntas Repetidas
+                        perguntasRestantes.remove(Questao);
+                        jogador.setDamage(jogador.getDamage() + 5);
+                        cancelarBuff();
+                    } else {
+                        System.out.println(ConsoleColors.RED_BOLD + "ERROU ❌" + ConsoleColors.RESET + "\n");
+                        System.out.println(ConsoleColors.RED_BRIGHT + "VOCE ERROU O CALCULO, PERDENDO 5 DE DANO " +
+                                ConsoleColors.RESET);
+                        jogador.setDamage(jogador.getDamage() - 5);
+                        cancelarBuff();
+
+                    }
+
+                }
+            } else {
+                if (turnosPassados != 0){
+                    System.out.println("Ainda não é possivel ativar o Buff SOMA, faltam " + turnosPassados + " turnos.");
+                }
+            }
+
+        }
+
+        private static void pausaTexto() {
+            try{
+                System.out.println("A HABILIDADE FOI ATIVADA, ACERTA A QUESTAO PARA GANHAR 5 DE DANO");
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        public Perguntas gerarPeruntaMatematico(Jogador jogador, Inimigos monstro){
+            if(perguntasRestantes.isEmpty()){
+                jogador.setOndas(jogador.getOndas()+2);
+                // Pegando todos os objetos do Enum Perguntas
+                Perguntas[] perguntas = Perguntas.values();
+
+                // Selecionando as perguntas por dificuldade
+                List<Perguntas> perguntasDificuldade = Arrays.stream(perguntas)
+                        .filter(a -> a.getDificuldade() <= jogador.getOndas())
+                        .toList();
+                perguntasRestantes.addAll(perguntasDificuldade);
+            }
+            jogador.setOndas(jogador.getOndas()-2);
+            // Sorteando uma pergunta da lista
+            int perguntaAleatoriaDificuldade = new Random().nextInt(perguntasRestantes.size());
+            return perguntasRestantes.get(perguntaAleatoriaDificuldade);
         }
 
         @Override
         public void registrarTurno() {
+            vez = true;
 
+            if(turnosPassados > 0){
+                turnosPassados--;
+                String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo" : "";
+                System.out.println(mgs);
+            }
+            // Se 3 turnos passaram, pode recuperar a habilidade
+            if (turnosPassados == 0) {
+                System.out.println("A habilidade SOMA pode ser reaplicada!");
+            }
+
+        }
+
+        private void cancelarBuff() {
+            turnosPassados = 5;
+            vez = true; // Permite a execução no próximo turno
         }
     },
 

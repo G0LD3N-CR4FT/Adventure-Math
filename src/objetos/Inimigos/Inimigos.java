@@ -117,8 +117,8 @@ public class Inimigos {
     public void statusMonstro() {
         System.out.println("\n Nome: " + this.monstro.getNome());
         System.out.println(this.monstro.getFotoMonstro());
-        System.out.println("Vida: " + this.getVida() + " | Dano: " + this.getDano());
-    
+        System.out.println(ConsoleColors.RED_BOLD + "Vida: " + this.getVida() + "\uD83D\uDDA4 | Dano: " + this.getDano() + "\uD83D\uDD2A" + ConsoleColors.RESET);
+
         // Criar barra de vida
         int barLength = 40; // Comprimento total da barra
         int filledLength = (int) ((double) this.getVida() / this.monstro.getVida() * barLength);
@@ -126,7 +126,7 @@ public class Inimigos {
     
         for (int i = 0; i < barLength; i++) {
             if (i < filledLength) {
-                bar.append(ConsoleColors.RED_BOLD +"█"+ ConsoleColors.RESET); // Parte preenchida da barra
+                bar.append(ConsoleColors.RED_BOLD + "█"+ ConsoleColors.RESET); // Parte preenchida da barra
             } else {
                 bar.append(" "); // Parte vazia da barra
             }
