@@ -71,6 +71,9 @@ public enum Armas {
                 if (turnosPassados != 0){
                     System.out.println("Ainda não é possivel ativar a habilidade CALCULO INFINITO, faltam " + turnosPassados + " turnos.");
                 }
+                if(finalizado){
+                    System.out.println("Você ja atingiu o infinito");
+                }
             }
 
         }
@@ -259,7 +262,7 @@ public enum Armas {
                         // Removendo Perguntas Repetidas
                         perguntasRestantes.remove(Questao);
                         // Dando o dano insta kill
-                        if(monstro.getMonstro() == TipoMonstro.BOSS){
+                        if(monstro.getMonstro() != TipoMonstro.BOSS){
                             pausaMorte();
                             int danoAntigo = monstro.getVida();
                             monstro.danoTomado(danoAntigo, monstro.getMonstro());
