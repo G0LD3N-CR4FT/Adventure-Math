@@ -16,6 +16,7 @@ public enum Armas {
         private int turnosPassados = 0; // Contador de turnos passados
         private boolean vez = true;
         private int acertos = 10;
+        private boolean finalizado = false;
         private boolean mgsAplicado = true;
 
         // Vai pegar uma pergunta de 2 Ondas acima para responder
@@ -23,7 +24,7 @@ public enum Armas {
         public void aplicarBuff(Jogador jogador, Inimigos monstro) {
             if (turnosPassados == 0 ) {
                 mgsAplicado = false;
-                if(vez) {
+                if(vez && !finalizado) {
                     Scanner entrada = new Scanner(System.in);
 
                     Perguntas Questao = gerarPeruntaMatematico(jogador, monstro);
@@ -31,7 +32,7 @@ public enum Armas {
                     System.out.println("\n" + Questao.getPergunta());
                     System.out.println(Questao.getAlternativa());
                     // Mostrar a resposta para facilitar
-                    System.out.println("A Resposta correta é: " + Questao.getResposta());
+                    System.out.println("Responda com a letra da alternativa (A, B, C, D)");
 
                     String respostaCorretaDificuldade = Questao.getResposta();
 
@@ -43,13 +44,14 @@ public enum Armas {
                         System.out.println(ConsoleColors.CYAN_BOLD + "VOCE ACERTOU O CALCULO, RELIZANDO O INFINITO" + ConsoleColors.RESET);
                         // Removendo Perguntas Repetidas
                         perguntasRestantes.remove(Questao);
-                        int danoAntigo = this.getAtaque();
-                        this.aumentarAtaque( this.getAtaque() / this.acertos);
-                        jogador.setDamage(this.getAtaque() - danoAntigo);
                         if (this.acertos == 0) {
                             System.out.println("Voce alcançou o infinito");
+                            finalizado = true;
                             jogador.setDamage(Integer.MAX_VALUE);
                         } else {
+                            int danoAntigo = this.getAtaque();
+                            this.aumentarAtaque( this.getAtaque() / this.acertos);
+                            jogador.setDamage(this.getAtaque() - danoAntigo);
                             this.acertos--;
                         }
                         cancelarBuff();
@@ -244,7 +246,7 @@ public enum Armas {
                     System.out.println("\n" + Questao.getPergunta());
                     System.out.println(Questao.getAlternativa());
                     // Mostrar a resposta para facilitar
-                    System.out.println("A Resposta correta é: " + Questao.getResposta());
+                    System.out.println("Responda com a letra da alternativa (A, B, C, D)");
 
                     String respostaCorretaDificuldade = Questao.getResposta();
 
@@ -349,7 +351,7 @@ public enum Armas {
     public String toString() {
         return    ConsoleColors.CYAN_BOLD + this.name() + ConsoleColors.RESET + "\n" +
                 ConsoleColors.RED_UNDERLINED + "ATAQUE DA ARMA: " + ataque + ConsoleColors.RESET + "💥\n" +
-                ConsoleColors.CYAN_BOLD + "HABILIDADE DA ARMA: " + descricaoHabilidade + ConsoleColors.RESET + "⚔️\n" +
+                ConsoleColors.GREEN_BOLD + "HABILIDADE DA ARMA: " + descricaoHabilidade + ConsoleColors.RESET + "⚔️\n" +
                 "\n";
     }
 
