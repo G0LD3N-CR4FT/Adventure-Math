@@ -50,6 +50,20 @@ public class Inimigos {
         this.dano = listaTipoMonstroHabilitados.get(mostroAleatorio).getDamage();
     }
 
+    // Convocar o Boss de forma Aleatoria
+    public void convocarBoss(Jogador p){
+        TipoMonstro[] tipoMonstro = TipoMonstro.values();
+
+        List<TipoMonstro> listaTipoMonstroHabilitados = Arrays.stream(tipoMonstro)
+                .filter(a -> a.getDificuldade() <= p.getOndas())
+                .toList();
+        
+        int mostroAleatorio = new Random().nextInt(listaTipoMonstroHabilitados.size());
+        this.setMonstro(listaTipoMonstroHabilitados.get(mostroAleatorio));
+        this.vida = listaTipoMonstroHabilitados.get(mostroAleatorio).getVida();
+        this.dano = listaTipoMonstroHabilitados.get(mostroAleatorio).getDamage();
+    }
+
     // Gerando uma pergunta baseado na onda do Jogador
     public static Perguntas gerarQuestao(Jogador jogador){
 

@@ -145,7 +145,7 @@ public enum Classes {
                             // System.out.println("Causando " + danoPorTurno + " de dano no Inimigo.");
                             int vidatotal = jogador.getClasse().getBonusVida() +100;
                             int vidaResto = jogador.getVida();
-                            boolean vidaCheia = jogador.getClasse().getBonusVida() + 100 >= jogador.getVida();
+                            boolean vidaCheia = jogador.getClasse().getBonusVida() + 100 == jogador.getVida();
                             if(!vidaCheia){
                                 jogador.setVida(jogador.getVida() + vidaPorTurno);
                                 System.out.println(ConsoleColors.PURPLE_BOLD +"Voce recuperou 10 de vida" + ConsoleColors.RESET);
