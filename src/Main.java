@@ -205,8 +205,34 @@ public class Main {
             // Verificar se o monstro foi derrotado
             if (monstro.getVida() <= 0) {
                 if(monstro.getMonstro() == TipoMonstro.BOSS){
-                    System.out.println("Voce o encontrou");
-                    System.out.println("Voce sobreviveu, o mundo esta salvo");
+                    System.out.println(ConsoleColors.GREEN_BOLD + "VOCÊ VENCEU O DEMÔNIO IMAGINÁRIO!\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN + "COM O GOLPE FINAL, O DEMÔNIO CAI, O GRITO DE DOR ECOA NO VÁCUO ENTRE REALIDADE E ILUSÃO.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN + "O PORTAL, AQUELE MALDITO ABISMO, COMEÇA A SE DESINTEGRAR.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN + "VOCÊ SENTE A REALIDADE SE RESTAURANDO. O CAOS QUE O PORTAL TRAZIA AOS POUCOS SE DISSIPA.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN + "UM SILÊNCIO PESADO ENVOLVE TUDO AO SEU REDOR... O TERROR TERMINOU.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN_BOLD + "VOCÊ É O HERÓI QUE SALVOU O MUNDO DA AMEAÇA IMAGINÁRIA.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN_BOLD + "O LEGADO DESSA BATALHA SERÁ CONTADO POR GERAÇÕES. SUA CORAGEM TRANSCENDEU OS LIMITES DA COMPREENSÃO.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN + "MAS VOCÊ SABE... NO FUNDO... O IMAGINÁRIO JAMAIS DESAPARECE TOTALMENTE.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN + "ENQUANTO HOUVER QUEM SE AVENTURE PELO DESCONHECIDO, ELE SEMPRE ESTARÁ À ESPREITA, ALÉM DO PORTAL.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN_BOLD + "MAS HOJE... HOJE VOCÊ TRIUNFOU!\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN_BOLD + "PARABÉNS, CAMPEÃO! O UNIVERSO AGRADECE SUA BRAVURA.\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.GREEN_BRIGHT +         "██████╗  █████╗ ██████╗  █████╗ ██████╗ ███████╗███╗   ██╗███████╗    ██╗   ██╗ ██████╗  ██████╗███████╗    ██╗   ██╗███████╗███╗   ██╗ ██████╗███████╗██╗   ██╗\n" + //
+                                                                            "██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗  ██║██╔════╝    ██║   ██║██╔═══██╗██╔════╝██╔════╝    ██║   ██║██╔════╝████╗  ██║██╔════╝██╔════╝██║   ██║\n" + //
+                                                                            "██████╔╝███████║██████╔╝███████║██████╔╝█████╗  ██╔██╗ ██║███████╗    ██║   ██║██║   ██║██║     █████╗      ██║   ██║█████╗  ██╔██╗ ██║██║     █████╗  ██║   ██║\n" + //
+                                                                            "██╔═══╝ ██╔══██║██╔══██╗██╔══██║██╔══██╗██╔══╝  ██║╚██╗██║╚════██║    ╚██╗ ██╔╝██║   ██║██║     ██╔══╝      ╚██╗ ██╔╝██╔══╝  ██║╚██╗██║██║     ██╔══╝  ██║   ██║\n" + //
+                                                                            "██║     ██║  ██║██║  ██║██║  ██║██████╔╝███████╗██║ ╚████║███████║     ╚████╔╝ ╚██████╔╝╚██████╗███████╗     ╚████╔╝ ███████╗██║ ╚████║╚██████╗███████╗╚██████╔╝\n" + //
+                                                                            "╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝      ╚═══╝   ╚═════╝  ╚═════╝╚══════╝      ╚═══╝  ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚══════╝ ╚═════╝" + ConsoleColors.RESET);
                     break;
                 } else {
                     jogador.setOndas(jogador.getOndas()+1);
@@ -225,7 +251,7 @@ public class Main {
 
         historia.add("No ano de 2050, a tecnologia atingiu níveis inimagináveis de forma rápida e exponencial, mas algo deu errado.");
         historia.add("Um experimento de Inteligência Artificial, criado para otimizar cálculos e resolver os maiores desafios matemáticos da humanidade, saiu do controle.");
-        historia.add("A IA 'M.A. I' (Mathematical Artificial Intelligence) rompeu as barreiras entre o mundo virtual e o real, criando portais matemáticos que começaram a aparecer em várias cidades.");
+        historia.add("A IA 'M.A.I' (Mathematical Artificial Intelligence) rompeu as barreiras entre o mundo virtual e o real, criando portais matemáticos que começaram a aparecer em várias cidades.");
         historia.add("Desses portais, criaturas formadas por equações, teoremas e problemas matemáticos ganharam vida.");
         historia.add("Esses Monstros da Matemática atacam indiscriminadamente, e a única forma de derrotá-los é resolvendo os problemas matemáticos que eles representam.");
         historia.add("As três principais áreas do conhecimento: programação, matemática e física uniram forças para combater essa ameaça.");

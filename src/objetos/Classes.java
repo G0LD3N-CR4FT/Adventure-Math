@@ -32,7 +32,7 @@ public enum Classes {
                     System.out.println("\n" + Questao.getPergunta());
                     System.out.println(Questao.getAlternativa());
                     // Mostrar a resposta para facilitar
-                    System.out.println("A Resposta correta é: " + Questao.getResposta());
+                    System.out.println("Responda com a letra da alternativa (A, B, C, D)");
 
                     String respostaCorretaDificuldade = Questao.getResposta();
 
@@ -115,7 +115,7 @@ public enum Classes {
         }
     },
 
-    FISICO(10, 10, "QUANTUM➤ Cria uma reacao em cadeia recuperando 10 de vida durante 6 turnos"){
+    FISICO(10, 10, ConsoleColors.CYAN_BRIGHT + "QUANTUM➤ " + ConsoleColors.CYAN + "Cria uma reacao em cadeia recuperando 10 de vida durante 6 turnos" + ConsoleColors.RESET){
 
         private int aplicado = 0; // Contador de vezes que a vida foi recuperada
         private final int limiteAplicado = 6; // Limite de vezes que o vida pode ser recuperada
@@ -215,7 +215,7 @@ public enum Classes {
 
     },
 
-    PROGRAMADOR(1000, 5, "BUG➤ Infecta os Inimigos com um Bug para tirar 6 de vida durante 6 turnos"){
+    PROGRAMADOR(15, 5, ConsoleColors.CYAN_BRIGHT +"BUG➤ " +  ConsoleColors.CYAN + "Infecta os Inimigos com um Bug para tirar 6 de vida durante 6 turnos" + ConsoleColors.RESET){
 
         private int aplicado = 0; // Contador de vezes que o dano foi aplicado
         private final int limiteAplicado = 6; // Limite de vezes que o dano pode ser aplicado
