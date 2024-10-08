@@ -23,7 +23,11 @@ public class Jogador implements Pessoa {
 
     @Override
     public void setDamage(int damage) {
-        this.danoBasico += damage;
+        if(damage == Integer.MAX_VALUE){
+            this.danoBasico = damage;
+        } else {
+            this.danoBasico += damage;
+        }
     }
 
 
@@ -172,12 +176,13 @@ public class Jogador implements Pessoa {
                        bar.append(" "); // Parte vazia da barra
                 }
             }
-
+            boolean teste = danoBasico == Integer.MAX_VALUE ? true : false;
+        String texto = danoBasico == Integer.MAX_VALUE ? "♾️" : "2147483647";
         bar.append(ConsoleColors.BLACK_BOLD +"] " + ConsoleColors.RESET  + this.getVida() + "/" + vidaMaxima); // Exibindo a vida atual e a máxima
         System.out.println("Barra de Vida: " + bar.toString());
         System.out.println(ConsoleColors.GREEN_BOLD + "VIDA BASE---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + 100 + ConsoleColors.RESET + "💚\n" +
                 ConsoleColors.DARK_RED + "DANO BASE-----------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + 5 + ConsoleColors.RESET + "🥊\n" +
-                ConsoleColors.RED_BOLD + "DANO TOTAL---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + (danoBasico == Integer.MAX_VALUE ? "♾️" : danoBasico)+ ConsoleColors.RESET + "🥊\n" +
+                ConsoleColors.RED_BOLD + "DANO TOTAL---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + texto + ConsoleColors.RESET + "🥊\n" +
                 ConsoleColors.PURPLE_BOLD + "ONDA ATUAL----------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.PURPLE + this.getOndas() + ConsoleColors.RESET + "🌀\n" +
                 ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas + "\n" +
                 ConsoleColors.CYAN_BOLD + "CLASSE: " + ConsoleColors.RESET + tipoClasse + "\n");

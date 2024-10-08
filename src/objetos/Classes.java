@@ -85,8 +85,8 @@ public enum Classes {
                         .filter(a -> a.getDificuldade() <= jogador.getOndas())
                         .toList();
                 perguntasRestantes.addAll(perguntasDificuldade);
+                jogador.setOndas(jogador.getOndas()-2);
             }
-            jogador.setOndas(jogador.getOndas()-2);
             // Sorteando uma pergunta da lista
             int perguntaAleatoriaDificuldade = new Random().nextInt(perguntasRestantes.size());
             return perguntasRestantes.get(perguntaAleatoriaDificuldade);
