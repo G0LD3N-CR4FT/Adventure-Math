@@ -127,9 +127,16 @@ public class Main {
         // Continuar jogo até a vida do Inimigo Zerar
         while(jogador.getVida() > 0){
             // Escolher Novo Inimigo
-            monstro.convocarMonstro(jogador);
-            System.out.println(monstro.getMonstro().getFotoMonstro());
-            System.out.println(monstro.getMonstro().getEncontro());
+            if(jogador.getOndas() == 10){
+                //monstro.getMonstro();
+                System.out.println(monstro.getMonstro().getFotoMonstro());
+                System.out.println(monstro.getMonstro().getEncontro());
+            } else {
+                monstro.convocarMonstro(jogador);
+                System.out.println(monstro.getMonstro().getFotoMonstro());
+                System.out.println(monstro.getMonstro().getEncontro());
+            }
+
 
             executor.scheduleAtFixedRate(menuRunnable, 0, 500, TimeUnit.MILLISECONDS);
 

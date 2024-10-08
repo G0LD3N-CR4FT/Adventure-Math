@@ -223,7 +223,21 @@ public enum TipoMonstro implements Pessoa {
                        "                ##                                                              ##                  \n" + //
                        "                ##",
                  "\n Um espírito que se multiplica em padrões infinitos e complexos paira sobre sua mente. Você se vê preso em uma espiral de beleza e confusão.",
-                 1 ,10, 20);                          
+                 1 ,10, 20),
+            BOSS("Ogro Matematico",
+                             "       ,      ,\n" +
+                             "      /(.-\"\"-.)\\\n" +
+                             " |\\   \\/      \\/ /|\n" +
+                             " | \\ / =.  .= \\ /  |\n" +
+                             "  \\( \\  o\\/o  / ) /\n" +
+                             "   \\_, '-/  \\-'  ,_/\n" +
+                             "     /   \\__/     \\\n" +
+                             "     \\ \\__/\\__/ /\n" +
+                             "   ___\\ \\|--|/ /___\n" +
+                             " /`     \\       /   `\\\n" +
+                             "/        '----'        \\",
+                             "\n O IMAGINARIO ESTA DIANTE DE VOCE, NAO A NADA A SE FAZER ?",
+                             10 ,50, 500);
 
     private String nome;
     private String fotoMonstro;
