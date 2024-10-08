@@ -77,6 +77,7 @@ public class Main {
                             // Lógica de batalha
                             monstro.perguntar(jogador,teclado);
                             jogador.getClasse().registrarTurno();
+                            jogador.getArmas().registrarTurno();
                             break;
                         case "2":
                             // Exibir status
@@ -92,7 +93,7 @@ public class Main {
                             break;
                         case "5":
                             // Usar habilidade da arma
-
+                            jogador.aplicarHabilidade(jogador, monstro);
                             break;
                         default:
                             System.out.println(ConsoleColors.RED_BOLD +"TAL AÇÃO NÃO É POSSÍVEL"+ ConsoleColors.RESET);
@@ -233,25 +234,25 @@ public class Main {
 
         for(String key : historia){
             System.out.println(key);
-            Thread.sleep(100);
+            Thread.sleep(3500);
         }
     }
 
     public static void entradaBoss() throws InterruptedException {
         List<String> historia = new ArrayList<String>();
 
-        historia.add("Voce sente um calafrio na sua espinha");
-        historia.add("Finalmente voce chegou a causa de tudo isso... O Portal");
-        historia.add("Porem dentro a do portal a infinitude da matematica se estende, alem da compreensao voce ve aquela criatura");
-        historia.add("Ela saio do portal, voce sente que ele e o culpado, e assim que ele morrer, o portal cessara");
-        historia.add("Essa e sua luta.. nao, e nossa luta");
-        historia.add("Diante desse Terror imaginario, sera que voce consiguira pendurar ?");
-        historia.add("Me diga, voce esta pronto para alem do fim... agora e hora de entrar");
-        historia.add("No IMAGINARIO");
+        historia.add("VOCÊ SENTE UM CALAFRIO NA SUA ESPINHA...");
+        historia.add("FINALMENTE, VOCÊ CHEGOU À CAUSA DE TUDO ISSO... O PORTAL.");
+        historia.add("PORÉM, DENTRO DO PORTAL, A INFINITUDE DA MATEMÁTICA SE ESTENDE, ALÉM DA COMPREENSÃO. VOCÊ VÊ AQUELA CRIATURA...");
+        historia.add("ELA SAI DO PORTAL. VOCÊ SENTE QUE ELA É A CULPADA. E ASSIM QUE ELA MORRER, O PORTAL CESSARÁ.");
+        historia.add("ESSA É A NOSSA LUTA... DIANTE DESSE TERROR IMAGINÁRIO.");
+        historia.add("SERÁ QUE VOCÊ CONSEGUIRÁ VENCER?");
+        historia.add("ME DIGA, VOCÊ ESTÁ PRONTO PARA ALÉM DO FIM...");
+        historia.add("AGORA É HORA DE ENTRAR NO IMAGINÁRIO.");
 
-        for(String key : historia){
-            System.out.println(key);
-            Thread.sleep(1000);
+        for (String linha : historia) {
+            System.out.println(ConsoleColors.RED_BOLD + linha + ConsoleColors.RESET);
+            Thread.sleep(2000);
         }
     }
 }

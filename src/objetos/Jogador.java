@@ -23,12 +23,16 @@ public class Jogador implements Pessoa {
 
     @Override
     public void setDamage(int damage) {
-        this.danoBasico = damage;
+        this.danoBasico += damage;
     }
 
 
     public void aplicarBuff(Jogador jogador, Inimigos monstro) {
         tipoClasse.aplicarBuff(this, monstro);
+    }
+
+    public void aplicarHabilidade(Jogador jogador, Inimigos monstro) {
+        armas.aplicarBuff(this, monstro);
     }
 
 
@@ -173,7 +177,8 @@ public class Jogador implements Pessoa {
         System.out.println("Barra de Vida: " + bar.toString());
         System.out.println(ConsoleColors.GREEN_BOLD + "VIDA BASE---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + 100 + ConsoleColors.RESET + "💚\n" +
                 ConsoleColors.DARK_RED + "DANO BASE-----------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + 5 + ConsoleColors.RESET + "🥊\n" +
-                ConsoleColors.RED_BOLD + "DANO TOTAL---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + danoBasico + ConsoleColors.RESET + "🥊\n" +
+                ConsoleColors.RED_BOLD + "DANO TOTAL---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.RED + (danoBasico == Integer.MAX_VALUE ? "♾️" : danoBasico)+ ConsoleColors.RESET + "🥊\n" +
+                ConsoleColors.PURPLE_BOLD + "ONDA ATUAL---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.PURPLE + this.getOndas() + ConsoleColors.RESET + "🌀\n" +
                 ConsoleColors.CYAN_BOLD + "ARMA: " + ConsoleColors.RESET + armas + "\n" +
                 ConsoleColors.CYAN_BOLD + "CLASSE: " + ConsoleColors.RESET + tipoClasse + "\n");
     }

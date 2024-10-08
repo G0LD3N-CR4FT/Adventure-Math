@@ -9,18 +9,20 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public enum Classes {
-    MATEMATICO(5,10, ConsoleColors.GREEN_BRIGHT + "SOMA➤ " +
-                                                        ConsoleColors.GREEN + "Ao acertar uma pergunta de maior dificuldade, você aumenta seu dano base em 5." +
+    MATEMATICO(5,10, ConsoleColors.CYAN_BRIGHT + "SOMA➤ " +
+                                                        ConsoleColors.CYAN + "Ao acertar uma pergunta de maior dificuldade, você aumenta seu dano base em 5." +
                                                         ConsoleColors.RESET
 ){
 
         private static List<Perguntas> perguntasRestantes = new ArrayList<Perguntas>();
         private int turnosPassados = 0; // Contador de turnos passados
         private boolean vez = true;
+        private boolean mgsAplicado = true;
+
         // Vai pegar uma pergunta de 2 Ondas acima para responder
-        // TODO  VOU TER QUE REVISAR, ESTA DANDO LOOP INFINITO NA PARTE DO MENU.
         public void aplicarBuff(Jogador jogador, Inimigos monstro) {
             if (turnosPassados == 0 ) {
+                mgsAplicado = false;
                 if(vez) {
                     Scanner entrada = new Scanner(System.in);
 
@@ -42,13 +44,13 @@ public enum Classes {
                         System.out.println(ConsoleColors.CYAN_BOLD + "VOCE ACERTOU O CALCULO, GANHANDO 5 DE DANO" + ConsoleColors.RESET);
                         // Removendo Perguntas Repetidas
                         perguntasRestantes.remove(Questao);
-                        jogador.setDamage(jogador.getDamage() + 5);
+                        jogador.setDamage( + 5);
                         cancelarBuff();
                     } else {
                         System.out.println(ConsoleColors.RED_BOLD + "ERROU ❌" + ConsoleColors.RESET + "\n");
                         System.out.println(ConsoleColors.RED_BRIGHT + "VOCE ERROU O CALCULO, PERDENDO 5 DE DANO " +
                                 ConsoleColors.RESET);
-                        jogador.setDamage(jogador.getDamage() - 5);
+                        jogador.setDamage(- 5);
                         cancelarBuff();
 
                     }
@@ -65,7 +67,7 @@ public enum Classes {
         private static void pausaTexto() {
             try{
                 System.out.println("A HABILIDADE FOI ATIVADA, ACERTA A QUESTAO PARA GANHAR 5 DE DANO");
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -96,11 +98,12 @@ public enum Classes {
 
             if(turnosPassados > 0){
                 turnosPassados--;
-                String mgs = turnosPassados != 0 ? ConsoleColors.PURPLE_BOLD +"Faltam " + turnosPassados + " turnos para usar de novo" : "" + ConsoleColors.RESET;
+                String mgs = turnosPassados != 0 ? ConsoleColors.PURPLE_BOLD +"Faltam " + turnosPassados + " turnos para usar de novo " + this.name() : ConsoleColors.RESET;
                 System.out.println(mgs);
             }
             // Se 3 turnos passaram, pode recuperar a habilidade
-            if (turnosPassados == 0) {
+            if (turnosPassados == 0 && !mgsAplicado) {
+                mgsAplicado = true;
                 System.out.println(ConsoleColors.PURPLE_BOLD +"A habilidade SOMA pode ser utilizada novamente!"  + ConsoleColors.RESET);
             }
 
@@ -183,7 +186,7 @@ public enum Classes {
             if (!ativo) {
                 if(turnosPassados > 0){
                     turnosPassados--;
-                    String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo" : "";
+                    String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo " + this.name() : ConsoleColors.RESET;
                     System.out.println(mgs);
                 }
                 // Se 3 turnos passaram, pode recuperar a habilidade
@@ -248,7 +251,7 @@ public enum Classes {
                             aplicado++; // Incrementa o contador de execuções
                             int danoPorTurno = 6; // Dano a ser causado
                             // System.out.println("Causando " + danoPorTurno + " de dano no Inimigo.");
-                            monstro.danoTomado(danoPorTurno);
+                            monstro.danoTomado(danoPorTurno, monstro.getMonstro());
                             System.out.println(ConsoleColors.PURPLE_BOLD + "O inimigo tomou 6 de dano, agora ele esta com : " + monstro.getVida() + ConsoleColors.RESET);
 
                         } else if (aplicado >= limiteAplicado){
@@ -282,7 +285,7 @@ public enum Classes {
             if (!ativo) {
                 if(turnosPassados > 0){
                     turnosPassados--;
-                    String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo" : "";
+                    String mgs = turnosPassados != 0 ? "Faltam " + turnosPassados + " turnos para usar de novo " + this.name() : ConsoleColors.RESET;
                     System.out.println(mgs);
                 }
                 // Se 3 turnos passaram, pode recuperar a habilidade
@@ -325,7 +328,7 @@ public enum Classes {
 
     @Override
     public String toString() {
-        return   ConsoleColors.BLACK_BOLD +  this.name() + ConsoleColors.RESET + "\n" +
+        return   ConsoleColors.WHITE_BOLD +  this.name() + ConsoleColors.RESET + "\n" +
                 ConsoleColors.GREEN_BOLD + "BONUS DE VIDA: " + bonusVida + ConsoleColors.RESET + "💚\n" +
                 ConsoleColors.RED_BOLD + "BONUS DE DANO: " + bonusDano + ConsoleColors.RESET + "🥊\n" +
                 ConsoleColors.CYAN_BOLD + "HABILIDADE: " + descricaoHabilidade + ConsoleColors.RESET + "🧙\n" +

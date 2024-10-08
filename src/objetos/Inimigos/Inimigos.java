@@ -11,6 +11,7 @@ public class Inimigos {
 
     private TipoMonstro monstro;
     private static List<Perguntas> perguntasRestantes = new ArrayList<Perguntas>();
+    private static List<TipoMonstro> monstrosRestantes = new ArrayList<TipoMonstro>();
     private int vida;
     private int dano;
 
@@ -37,17 +38,22 @@ public class Inimigos {
     }
 
     // Convocar um tipo de Inimigo de forma Aleatoria
-    public void convocarMonstro(Jogador p){
-        TipoMonstro[] tipoMonstro = TipoMonstro.values();
+    public void convocarMonstro(Jogador jogador){
+        if(monstrosRestantes.isEmpty()){
+            // Pegando todos os objetos do Enum Perguntas
+            TipoMonstro[] tipoMonstro = TipoMonstro.values();
 
-        List<TipoMonstro> listaTipoMonstroHabilitados = Arrays.stream(tipoMonstro)
-                .filter(a -> a.getDificuldade() <= p.getOndas())
-                .toList();
+            // Selecionando as perguntas por dificuldade
+            List<TipoMonstro> perguntasDificuldade = Arrays.stream(tipoMonstro)
+                    .filter(a -> a.getDificuldade() <= jogador.getOndas())
+                    .toList();
+            monstrosRestantes.addAll(perguntasDificuldade);
+        }
 
-        int mostroAleatorio = new Random().nextInt(listaTipoMonstroHabilitados.size());
-        this.setMonstro(listaTipoMonstroHabilitados.get(mostroAleatorio));
-        this.vida = listaTipoMonstroHabilitados.get(mostroAleatorio).getVida();
-        this.dano = listaTipoMonstroHabilitados.get(mostroAleatorio).getDamage();
+        int mostroAleatorio = new Random().nextInt(monstrosRestantes.size());
+        this.setMonstro(monstrosRestantes.get(mostroAleatorio));
+        this.vida = monstrosRestantes.get(mostroAleatorio).getVida();
+        this.dano = monstrosRestantes.get(mostroAleatorio).getDamage();
     }
 
     // Convocar o Boss de forma Aleatoria
@@ -84,10 +90,11 @@ public class Inimigos {
     }
 
     // Evitar o inimigo ficar com vida negativa
-    public void danoTomado(int dano){
+    public void danoTomado(int dano, TipoMonstro monstro){
         int vidaRestante = this.getVida();
             if(dano > vidaRestante){
                 vidaRestante = 0;
+                monstrosRestantes.remove(monstro);
             } else {
                 vidaRestante -= dano;
             }
@@ -118,7 +125,7 @@ public class Inimigos {
                         " DE DANO" + ConsoleColors.RESET);
                 // Removendo Perguntas Repetidas
                 perguntasRestantes.remove(Questao);
-                this.danoTomado(jogador.getDamage());
+                this.danoTomado(jogador.getDamage(), this.getMonstro());
             } else {
                 System.out.println(ConsoleColors.RED_BOLD +"ERROU ❌" + ConsoleColors.RESET + "\n");
                 System.out.println(ConsoleColors.RED_BRIGHT +"O INIMIGO SE ENFURECEU COM SUA RESPOSTA. ELE TE ATACA CAUSANDO "+ this.monstro.getDamage() + " DE DANO NA SUA BARRA DE VIDA" +
