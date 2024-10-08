@@ -55,7 +55,7 @@ public class Inimigos {
         TipoMonstro[] tipoMonstro = TipoMonstro.values();
 
         List<TipoMonstro> listaTipoMonstroHabilitados = Arrays.stream(tipoMonstro)
-                .filter(a -> a.getDificuldade() <= p.getOndas())
+                .filter(a -> a.getDificuldade() >= 10)
                 .toList();
         
         int mostroAleatorio = new Random().nextInt(listaTipoMonstroHabilitados.size());

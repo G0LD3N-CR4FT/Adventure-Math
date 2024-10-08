@@ -2,6 +2,7 @@ package src;
 
 import src.colors.ConsoleColors;
 import src.objetos.Inimigos.Inimigos;
+import src.objetos.Inimigos.TipoMonstro;
 import src.objetos.Jogador;
 
 import java.util.ArrayList;
@@ -128,7 +129,8 @@ public class Main {
         while(jogador.getVida() > 0){
             // Escolher Novo Inimigo
             if(jogador.getOndas() == 10){
-                //monstro.getMonstro();
+                monstro.convocarBoss(jogador);
+                entradaBoss();
                 System.out.println(monstro.getMonstro().getFotoMonstro());
                 System.out.println(monstro.getMonstro().getEncontro());
             } else {
@@ -136,7 +138,6 @@ public class Main {
                 System.out.println(monstro.getMonstro().getFotoMonstro());
                 System.out.println(monstro.getMonstro().getEncontro());
             }
-
 
             executor.scheduleAtFixedRate(menuRunnable, 0, 500, TimeUnit.MILLISECONDS);
 
@@ -202,10 +203,16 @@ public class Main {
             }
             // Verificar se o monstro foi derrotado
             if (monstro.getVida() <= 0) {
-                jogador.setOndas(jogador.getOndas()+1);
-                Thread.sleep(2000);
-                System.out.println(ConsoleColors.CYAN_BOLD + "MONSTRO DERROTADO! PORÉM MAIS DELES AINDA ESTÃO A CAMINHO...\n" + ConsoleColors.RESET);
-                Thread.sleep(2000);
+                if(monstro.getMonstro() == TipoMonstro.BOSS){
+                    System.out.println("Voce o encontrou");
+                    System.out.println("Voce sobreviveu, o mundo esta salvo");
+                    break;
+                } else {
+                    jogador.setOndas(jogador.getOndas()+1);
+                    Thread.sleep(2000);
+                    System.out.println(ConsoleColors.CYAN_BOLD + "MONSTRO DERROTADO! PORÉM MAIS DELES AINDA ESTÃO A CAMINHO...\n" + ConsoleColors.RESET);
+                    Thread.sleep(2000);
+                }
             }
 
         }
@@ -227,6 +234,24 @@ public class Main {
         for(String key : historia){
             System.out.println(key);
             Thread.sleep(100);
+        }
+    }
+
+    public static void entradaBoss() throws InterruptedException {
+        List<String> historia = new ArrayList<String>();
+
+        historia.add("Voce sente um calafrio na sua espinha");
+        historia.add("Finalmente voce chegou a causa de tudo isso... O Portal");
+        historia.add("Porem dentro a do portal a infinitude da matematica se estende, alem da compreensao voce ve aquela criatura");
+        historia.add("Ela saio do portal, voce sente que ele e o culpado, e assim que ele morrer, o portal cessara");
+        historia.add("Essa e sua luta.. nao, e nossa luta");
+        historia.add("Diante desse Terror imaginario, sera que voce consiguira pendurar ?");
+        historia.add("Me diga, voce esta pronto para alem do fim... agora e hora de entrar");
+        historia.add("No IMAGINARIO");
+
+        for(String key : historia){
+            System.out.println(key);
+            Thread.sleep(1000);
         }
     }
 }
