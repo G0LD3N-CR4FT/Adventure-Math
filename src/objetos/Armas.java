@@ -11,11 +11,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public enum Armas {
-    CALCULADORA_DO_INFINITO(10, "O INFINITO: Acerte 10 questoes seguidas para conquistar o infinito"){
+    CALCULADORA_DO_INFINITO(10, "O INFINITO: Acerte 6 questoes seguidas para conquistar o infinito"){
         private static List<Perguntas> perguntasRestantes = new ArrayList<Perguntas>();
         private int turnosPassados = 0; // Contador de turnos passados
         private boolean vez = true;
-        private int acertos = 10;
+        private int acertos = 6;
         private boolean finalizado = false;
         private boolean mgsAplicado = true;
 
@@ -41,7 +41,7 @@ public enum Armas {
 
                     if (resposta.equalsIgnoreCase(respostaCorretaDificuldade)) {
                         System.out.println(ConsoleColors.GREEN_BOLD + "ACERTOU ✅" + ConsoleColors.RESET + "\n");
-                        System.out.println(ConsoleColors.CYAN_BOLD + "VOCE ACERTOU O CALCULO, RELIZANDO O INFINITO" + ConsoleColors.RESET);
+                        System.out.println(ConsoleColors.CYAN_BOLD + "VOCE ACERTOU O CALCULO, REALIZANDO O INFINITO" + ConsoleColors.RESET);
                         // Removendo Perguntas Repetidas
                         perguntasRestantes.remove(Questao);
                         if (this.acertos == 0) {
@@ -57,7 +57,7 @@ public enum Armas {
                         cancelarBuff();
                     } else {
                         System.out.println(ConsoleColors.RED_BOLD + "ERROU ❌" + ConsoleColors.RESET + "\n");
-                        System.out.println(ConsoleColors.RED_BRIGHT + "VOCE ERROU O CALCULO, CALCELANDO INFINITO" +
+                        System.out.println(ConsoleColors.RED_BRIGHT + "VOCE ERROU O CALCULO, CANCELANDO O INFINITO" +
                                 ConsoleColors.RESET);
                         this.aumentarAtaque( 10);
                         jogador.setDamage(this.getAtaque());

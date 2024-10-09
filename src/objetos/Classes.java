@@ -256,7 +256,7 @@ public enum Classes {
 
                         } else if (aplicado >= limiteAplicado){
                             System.out.println(ConsoleColors.PURPLE_BOLD + "O tempo da habilidade BUG acabou, necessário esperar " + (3 - turnosPassados) + " turno para usar de novo"+ ConsoleColors.RESET);
-                            System.out.println("Buff BUG finalizado apos ser executado  " + (limiteAplicado ) );
+                            System.out.println("Habilidade BUG finalizada após ser executada  " + (limiteAplicado ) + "turnos");
                             cancelarBuff(); // Reseta o estado do buff
                         }
                     }
