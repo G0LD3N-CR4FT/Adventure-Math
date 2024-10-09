@@ -177,7 +177,7 @@ public class Jogador implements Pessoa {
                 }
             }
             boolean teste = danoBasico == Integer.MAX_VALUE ? true : false;
-        String texto = danoBasico == Integer.MAX_VALUE ? "♾️" : "2147483647";
+        String texto = danoBasico == Integer.MAX_VALUE ? "♾️" : Integer.toString(danoBasico);
         bar.append(ConsoleColors.BLACK_BOLD +"] " + ConsoleColors.RESET  + this.getVida() + "/" + vidaMaxima); // Exibindo a vida atual e a máxima
         System.out.println("Barra de Vida: " + bar.toString());
         System.out.println(ConsoleColors.GREEN_BOLD + "VIDA BASE---------------------------------------------------" + ConsoleColors.RESET +  ConsoleColors.GREEN + 100 + ConsoleColors.RESET + "💚\n" +

@@ -417,7 +417,7 @@ public enum TipoMonstro implements Pessoa {
                               " ▒ ░░  ░      ░  ▒   ▒▒ ░  ░   ░  ▒ ░░ ░░   ░ ▒░  ▒   ▒▒ ░  ░▒ ░ ▒░▓██ ░▒░     ░ ▒  ▒  ░ ░  ░░  ░      ░  ░ ▒ ▒░ ░ ░░   ░ ▒░\n" + //
                               " ▒ ░░      ░     ░   ▒   ░ ░   ░  ▒ ░   ░   ░ ░   ░   ▒     ░░   ░ ▒ ▒ ░░      ░ ░  ░    ░   ░      ░   ░ ░ ░ ▒     ░   ░ ░ \n" + //
                               " ░         ░         ░  ░      ░  ░           ░       ░  ░   ░     ░ ░           ░       ░  ░       ░       ░ ░           ░" + ConsoleColors.RESET,
-                             10 ,50, 250);
+                             10 ,50, 200);
 
     private String nome;
     private String fotoMonstro;

@@ -149,7 +149,7 @@ public enum Perguntas {
                     "B) 3  \n" +
                     "C) 4  \n" +
                     "D) 5  ",
-            "D",
+            "C",
             2),
 
     QUESTAO19("Qual o valor de (x) em (3x = 9)?", 
@@ -228,7 +228,7 @@ public enum Perguntas {
             "A) 3  \n" +
                     "B) 2  \n" +
                     "C) 1  \n" +
-                    "D) 0  ",
+                    "D) 17 ",
             "D",
             3),
 
