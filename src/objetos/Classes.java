@@ -110,7 +110,7 @@ public enum Classes {
         }
 
         private void cancelarBuff() {
-            turnosPassados = 5;
+            turnosPassados = 3;
             vez = true; // Permite a execução no próximo turno
         }
     },
@@ -156,7 +156,7 @@ public enum Classes {
                                 System.out.println(ConsoleColors.PURPLE_BOLD + "A vida ja esta cheia" + ConsoleColors.RESET);
                             }
                         } else if (aplicado >= limiteAplicado){
-                            System.out.println(ConsoleColors.PURPLE_BOLD +"O tempo da habilidade QUANTUM acabou, necessário esperar " + (5 - turnosPassados) + " turnos para usar de novo"  + ConsoleColors.RESET);
+                            System.out.println(ConsoleColors.PURPLE_BOLD +"O tempo da habilidade QUANTUM acabou, necessário esperar " + (4 - turnosPassados) + " turnos para usar de novo"  + ConsoleColors.RESET);
                             System.out.println("Buff QUANTUM finalizado apos ser executado  " + (limiteAplicado ) );
                             cancelarBuff(); // Reseta o estado do buff
                         }
@@ -202,7 +202,7 @@ public enum Classes {
             try {
                 ativo = false; // Desativa o buff
                 aplicado = 0; // Reseta o contador de execuções
-                turnosPassados = 5;
+                turnosPassados = 4;
                 vez = true; // Permite a execução no próximo turno
                 executor.shutdown(); // Finaliza o executor para liberar recursos
 

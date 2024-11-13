@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-     private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+    private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -129,7 +129,7 @@ public class Main {
         // Continuar jogo até a vida do Inimigo Zerar
         while(jogador.getVida() > 0){
             // Escolher Novo Inimigo
-            if(jogador.getOndas() == 10){
+            if(jogador.getOndas() == 8){
                 monstro.convocarBoss(jogador);
                 entradaBoss();
                 System.out.println(monstro.getMonstro().getFotoMonstro());
