@@ -32,7 +32,7 @@ public enum Armas {
                     System.out.println("\n" + Questao.getPergunta());
                     System.out.println(Questao.getAlternativa());
                     // Mostrar a resposta para facilitar
-                    System.out.println("Responda com a letra da alternativa (A, B, C, D)");
+                    System.out.println("Responda com a letra da alternativa (A, B, C, D...)");
 
                     String respostaCorretaDificuldade = Questao.getResposta();
 
@@ -249,7 +249,7 @@ public enum Armas {
                     System.out.println("\n" + Questao.getPergunta());
                     System.out.println(Questao.getAlternativa());
                     // Mostrar a resposta para facilitar
-                    System.out.println("Responda com a letra da alternativa (A, B, C, D)");
+                    System.out.println("Responda com a letra da alternativa (A, B, C, D...)");
 
                     String respostaCorretaDificuldade = Questao.getResposta();
 
