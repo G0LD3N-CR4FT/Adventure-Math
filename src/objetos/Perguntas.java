@@ -258,10 +258,10 @@ public enum Perguntas {
 
     QUESTAO32("Qual o valor de Tan(30º)?",
             "A) 1/3  \n" +
-                    "B) √3  \n" +
+                    "B) √3/3  \n" +
                     "C) 1  \n" +
                     "D) 0.5  ",
-            "A",
+            "B",
             2),
 
     QUESTAO33("Se Sin(x) = Cos(45º), qual o valor de (x)?",
@@ -273,7 +273,7 @@ public enum Perguntas {
             3),
 
     QUESTAO34("Qual o valor de Cos(45º)?",
-            "A) 1/√2  \n" +
+            "A) √2/2  \n" +
                     "B) 1/2  \n" +
                     "C) 0.5  \n" +
                     "D) 1  ",
