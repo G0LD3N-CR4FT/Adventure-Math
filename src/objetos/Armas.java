@@ -11,11 +11,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public enum Armas {
-    CALCULADORA_DO_INFINITO(10, "O INFINITO: Acerte 6 questoes seguidas para conquistar o infinito"){
+    CALCULADORA_DO_INFINITO(10, "O INFINITO: Acerte 5 questoes seguidas para conquistar o infinito"){
         private static List<Perguntas> perguntasRestantes = new ArrayList<Perguntas>();
         private int turnosPassados = 0; // Contador de turnos passados
         private boolean vez = true;
-        private int acertos = 6;
+        private int acertos = 5;
         private boolean finalizado = false;
         private boolean mgsAplicado = true;
 
@@ -61,7 +61,7 @@ public enum Armas {
                                 ConsoleColors.RESET);
                         this.aumentarAtaque( 10);
                         jogador.setDamage(this.getAtaque());
-                        this.acertos = 10;
+                        this.acertos = 5;
                         cancelarBuff();
 
                     }
@@ -343,7 +343,7 @@ public enum Armas {
         }
 
         private void cancelarBuff() {
-            turnosPassados = 10;
+            turnosPassados = 4  ;
             vez = true; // Permite a execução no próximo turno
         }
     };

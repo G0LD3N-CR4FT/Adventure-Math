@@ -325,7 +325,7 @@ public enum TipoMonstro implements Pessoa {
                  "                ##################################################################################  \n" + //
                  "                ##################################################################################",
            "\n Das profundezas do abismo lógico, surge o Devorador de Paradoxos, distorcendo as leis da realidade e devorando tudo que desafia a razão.",
-           3 ,40, 90),
+           3 ,40, 120),
 
             BOSS("Imaginary Demon",
                              "                                                                                                      ::@@::++MMMMMMMM                                                                                  \n" + //
@@ -417,7 +417,7 @@ public enum TipoMonstro implements Pessoa {
                               " ▒ ░░  ░      ░  ▒   ▒▒ ░  ░   ░  ▒ ░░ ░░   ░ ▒░  ▒   ▒▒ ░  ░▒ ░ ▒░▓██ ░▒░     ░ ▒  ▒  ░ ░  ░░  ░      ░  ░ ▒ ▒░ ░ ░░   ░ ▒░\n" + //
                               " ▒ ░░      ░     ░   ▒   ░ ░   ░  ▒ ░   ░   ░ ░   ░   ▒     ░░   ░ ▒ ▒ ░░      ░ ░  ░    ░   ░      ░   ░ ░ ░ ▒     ░   ░ ░ \n" + //
                               " ░         ░         ░  ░      ░  ░           ░       ░  ░   ░     ░ ░           ░       ░  ░       ░       ░ ░           ░" + ConsoleColors.RESET,
-                             10 ,50, 200);
+                             10 ,50, 250);
 
     private String nome;
     private String fotoMonstro;
